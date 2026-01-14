@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huy ezgg</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --bg: #0f172a; --sidebar: #1e293b; --card: #1e293b;
+            --primary: #6366f1; --accent: #ec4899; --success: #10b981;
+            --text: #f8fafc; --border: rgba(255, 255, 255, 0.1);
+        }
+        * { box-sizing: border-box; font-family: 'Inter', sans-serif; -webkit-user-select: none; user-select: none; }
+        body { margin: 0; background: var(--bg); color: var(--text); overflow: hidden; display: flex; height: 100vh; }
+
+        /* SIDEBAR */
+        .sidebar { width: 280px; background: var(--sidebar); padding: 25px; border-right: 1px solid var(--border); display: flex; flex-direction: column; flex-shrink: 0; }
+        .logo { font-size: 24px; font-weight: 800; color: var(--accent); margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; text-align: center; }
+        
+        /* SWITCH ACC */
+        .account-box { background: rgba(0,0,0,0.3); padding: 12px; border-radius: 15px; margin-bottom: 25px; border: 1px solid var(--border); }
+        .acc-option { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 10px; cursor: pointer; transition: 0.2s; font-size: 13px; color: #94a3b8; margin-bottom: 5px; }
+        .acc-option.active { color: white; background: var(--primary); font-weight: bold; }
+        .acc-dot { width: 8px; height: 8px; border-radius: 50%; background: #475569; }
+        .active .acc-dot { background: #fff; box-shadow: 0 0 8px #fff; }
+
+        .nav-item { padding: 14px 18px; border-radius: 12px; cursor: pointer; color: #94a3b8; margin-bottom: 8px; transition: 0.3s; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+        .nav-item.active { background: rgba(255,255,255,0.1); color: white; }
+
+        .main { flex: 1; padding: 30px; overflow-y: auto; background: #0b1120; }
+        .page { display: none; animation: fadeIn 0.4s ease; }
+        .page.active { display: block; }
+
+        /* WHEEL */
+        .wheel-box { position: relative; width: 340px; height: 340px; margin: 15px auto; }
+        #wheelCanvas { width: 100%; height: 100%; border-radius: 50%; border: 12px solid #334155; }
+        .wheel-arrow { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); z-index: 10; font-size: 45px; color: #fff; }
+
+        .grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 25px; }
+        .card { background: var(--card); border-radius: 24px; padding: 25px; border: 1px solid var(--border); }
+        
+        .btn { width: 100%; padding: 15px; border: none; border-radius: 14px; cursor: pointer; font-weight: 800; transition: 0.2s; text-transform: uppercase; }
+        .btn:active { transform: scale(0.96); }
+
+        /* TABLES */
+        table { width: 100%; border-collapse: collapse; background: #16213e; border-radius: 15px; overflow: hidden; margin-top: 20px; }
+        th { background: #1e293b; padding: 15px; text-align: left; color: #94a3b8; font-size: 13px; }
+        td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; }
+
+        /* STATS CARDS */
+        .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 25px; }
+        .s-card { background: var(--sidebar); padding: 20px; border-radius: 15px; border-left: 5px solid var(--primary); }
+        .s-val { font-size: 22px; font-weight: 800; color: #fff; margin-top: 5px; }
+
+        /* SELECTOR */
+        .bag-selector-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.97); z-index: 9999; display: none; flex-direction: column; align-items: center; justify-content: center; }
+        .bag-grid-9 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .bag-box { width: 100px; height: 130px; background: linear-gradient(135deg, #f472b6, #db2777); border-radius: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 40px; animation: bounce 0.5s infinite alternate; }
+
+        #auth-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 10000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+        @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-15px); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div id="auth-overlay">
+        <div class="card" style="width: 320px; text-align: center;">
+            <h2 style="margin-bottom: 15px;">MÃ PIN CHỦ CỬA HÀNG</h2>
+            <input type="password" id="admin-pin" placeholder="****" style="width:100%; padding:15px; border-radius:12px; border:2px solid var(--primary); background:#0f172a; color:white; text-align:center; font-size:28px; letter-spacing:8px;">
+            <button class="btn" style="background:var(--primary); color:white; margin-top:15px;" onclick="checkPin()">XÁC NHẬN</button>
+            <button class="btn" style="background:transparent; color:#64748b;" onclick="closeAuth()">HỦY</button>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <div class="logo">HUY EZGG 🌸</div>
+        <div class="account-box">
+            <div class="acc-option active" id="acc-guest" onclick="switchAcc('guest')"><div class="acc-dot"></div>👤 KHÁCH HÀNG</div>
+            <div class="acc-option" id="acc-admin" onclick="switchAcc('admin')"><div class="acc-dot"></div>🔑 ADMIN</div>
+        </div>
+        <div class="nav-item active" onclick="showPage('game', this)">🎮 Màn hình chính</div>
+        <div class="nav-item" id="nav-stats" onclick="showPage('stats', this)" style="display:none">📊 Thống kê doanh thu</div>
+        <div style="margin-top: auto; padding-top: 20px;">
+            <button class="btn" style="background: #ef4444; color: white; font-size: 11px; padding: 10px;" onclick="location.reload()">ĐĂNG XUẤT</button>
+        </div>
+    </div>
+
+    <div class="main">
+        <div id="page-game" class="page active">
+            <div class="grid">
+                <div class="card">
+                    <h3 style="color: var(--accent); margin-top:0;">🛍️ TÚI MÙ (20,000đ)</h3>
+                    <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px;">
+                        <button class="btn" style="background: #334155; color: white;" onclick="openSelector('Nước')">🥤 Nước Giải Khát</button>
+                        <button class="btn" style="background: #334155; color: white;" onclick="openSelector('Đồ Ăn')">🌭 Đồ Ăn Vặt</button>
+                        <button class="btn" style="background: #334155; color: white;" onclick="openSelector('Tráng Miệng')">🍮 Tráng Miệng</button>
+                    </div>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <h3 style="color: var(--primary); margin-top:0;">🎡 VÒNG QUAY MAY MẮN</h3>
+                    <div class="wheel-box">
+                        <div class="wheel-arrow">▼</div>
+                        <canvas id="wheelCanvas" width="340" height="340"></canvas>
+                    </div>
+                    <button class="btn" style="background: var(--primary); color: white; width: 220px;" onclick="playWheel()">QUAY NGAY</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-stats" class="page">
+            <div class="stat-grid">
+                <div class="s-card" style="border-color: var(--success);"><div>TỔNG THU</div><div class="s-val" id="total-rev">0đ</div></div>
+                <div class="s-card" style="border-color: var(--accent);"><div>VỐN QUÀ</div><div class="s-val" id="total-cost">0đ</div></div>
+                <div class="s-card" style="border-color: var(--primary);"><div>LỢI NHUẬN</div><div class="s-val" id="total-profit">0đ</div></div>
+            </div>
+            <table>
+                <thead><tr><th>THỜI GIAN</th><th>LOẠI</th><th>TÊN QUÀ</th><th>THU/CHI</th><th>THAO TÁC</th></tr></thead>
+                <tbody id="stat-table"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="bag-selector" class="bag-selector-overlay">
+        <h1 style="color: white; margin-bottom: 30px;">CHỌN 1 TÚI BẤT KỲ</h1>
+        <div class="bag-grid-9" id="bag-grid"></div>
+        <button class="btn" style="width: 150px; background: #334155; color: white; margin-top: 40px;" onclick="closeSelector()">HUỶ</button>
+    </div>
+
+    <div id="res-modal" style="position:fixed; inset:0; background:rgba(0,0,0,0.96); z-index:10001; display:none; align-items:center; justify-content:center;">
+        <div class="card" style="width:380px; text-align:center; border: 2px solid var(--accent);">
+            <div id="res-icon" style="font-size: 90px; margin-bottom: 20px;">🎁</div>
+            <h3 id="res-name" style="font-size: 26px; margin-bottom: 30px;">---</h3>
+            <div id="admin-actions" style="display:none; border-top: 1px solid var(--border); padding-top: 20px;">
+                <button class="btn" style="background: var(--success); color: white;" onclick="saveEntry(true)">LƯU VÀO THỐNG KÊ</button>
+            </div>
+            <button class="btn" style="background: var(--primary); color: white; margin-top: 10px;" onclick="saveEntry(false)">ĐÓNG</button>
+        </div>
+    </div>
+
+    <script>
+        const ITEMS = {
+            'Nước': [ {name:"Trà tắc", cost:8000, gW:15, aW:75, icon:"🍹"}, {name:"Trà đào", cost:13000, gW:35, aW:20, icon:"🍑"}, {name:"Trà dâu", cost:18000, gW:50, aW:5, icon:"🍓"} ],
+            'Đồ Ăn': [ {name:"Nem chua", cost:9000, gW:15, aW:75, icon:"🍢"}, {name:"Bánh lá", cost:12000, gW:35, aW:20, icon:"🫔"}, {name:"Mẹt ăn vặt", cost:24000, gW:50, aW:5, icon:"🍱"} ],
+            'Tráng Miệng': [ {name:"Rau câu", cost:6000, gW:15, aW:75, icon:"🍮"}, {name:"Sữa chua", cost:13000, gW:35, aW:20, icon:"🍨"}, {name:"Chè bưởi", cost:17000, gW:50, aW:5, icon:"🥣"} ],
+            'Wheel': [
+                {name:"Kẹo mút", cost:1000, gW:25, aW:40, icon:"🍭"}, {name:"Voucher 5k", cost:5000, gW:25, aW:20, icon:"🎟️"},
+                {name:"Voucher 10k", cost:10000, gW:10, aW:5, icon:"🎟️"}, {name:"Mất lượt", cost:0, gW:40, aW:35, icon:"❌"},
+                {name:"Kẹo mút", cost:1000, gW:25, aW:40, icon:"🍭"}, {name:"Voucher 5k", cost:5000, gW:25, aW:20, icon:"🎟️"},
+                {name:"Voucher 10k", cost:10000, gW:10, aW:5, icon:"🎟️"}, {name:"Mất lượt", cost:0, gW:40, aW:35, icon:"❌"}
+            ]
+        };
+
+        let isAdminUnlocked = false, currentRole = 'guest';
+        let statsData = JSON.parse(localStorage.getItem('hanami_v7')) || [];
+        let pendingItem = null;
+
+        // AUTH & SWITCH ACC
+        function switchAcc(role) {
+            if (role === 'admin') {
+                if (!isAdminUnlocked) { document.getElementById('auth-overlay').style.display = 'flex'; }
+                else { setAdmin(); }
+            } else { setGuest(); }
+        }
+        function checkPin() {
+            if (document.getElementById('admin-pin').value === 'bi12345678') {
+                isAdminUnlocked = true; setAdmin(); closeAuth();
+            } else { alert('Sai mã PIN!'); }
+        }
+        function setAdmin() { currentRole = 'admin'; updateUI(); }
+        function setGuest() { currentRole = 'guest'; updateUI(); showPage('game', document.querySelector('.nav-item')); }
+        function closeAuth() { document.getElementById('auth-overlay').style.display = 'none'; }
+        function updateUI() {
+            document.getElementById('acc-guest').classList.toggle('active', currentRole === 'guest');
+            document.getElementById('acc-admin').classList.toggle('active', currentRole === 'admin');
+            document.getElementById('nav-stats').style.display = currentRole === 'admin' ? 'flex' : 'none';
+        }
+
+        // WHEEL LOGIC (SIÊU NHANH)
+        function drawWheel() {
+            const canvas = document.getElementById('wheelCanvas'); const ctx = canvas.getContext('2d');
+            const labels = ["KẸO MÚT", "VOUCHER 5K", "VOUCHER 10K", "MẤT LƯỢT", "KẸO MÚT", "VOUCHER 5K", "VOUCHER 10K", "MẤT LƯỢT"];
+            const colors = ['#6366f1', '#ec4899', '#8b5cf6', '#f43f5e', '#6366f1', '#ec4899', '#8b5cf6', '#f43f5e'];
+            const arc = Math.PI / 4;
+            ctx.clearRect(0, 0, 340, 340);
+            for(let i=0; i<8; i++) {
+                ctx.beginPath(); ctx.fillStyle = colors[i]; ctx.moveTo(170, 170);
+                ctx.arc(170, 170, 160, i * arc, (i + 1) * arc); ctx.fill();
+                ctx.save(); ctx.translate(170, 170); ctx.rotate(i * arc + arc/2);
+                ctx.fillStyle = "white"; ctx.font = "bold 11px Inter"; ctx.textAlign = "right";
+                ctx.fillText(labels[i], 150, 5); ctx.restore();
+            }
+        }
+
+        function playWheel() {
+            const canvas = document.getElementById('wheelCanvas');
+            const pool = ITEMS['Wheel'], wKey = currentRole === 'admin' ? 'aW' : 'gW';
+            let total = pool.reduce((s, i) => s + i[wKey], 0), r = Math.random() * total, winIdx = 0;
+            for (let i = 0; i < pool.length; i++) { if (r < pool[i][wKey]) { winIdx = i; break; } r -= pool[i][wKey]; }
+            pendingItem = { ...pool[winIdx], type: 'Vòng Quay', time: new Date().toLocaleString('vi-VN') };
+            const stopAt = 3600 + (360 - (winIdx * 45)) - 22.5 - 90;
+            canvas.style.transition = 'transform 3.5s cubic-bezier(0.15, 0, 0.15, 1)';
+            canvas.style.transform = `rotate(${stopAt}deg)`;
+            setTimeout(() => { showResult(); canvas.style.transition = 'none'; canvas.style.transform = `rotate(${stopAt % 360}deg)`; }, 3800);
+        }
+
+        // BAGS LOGIC
+        function openSelector(type) {
+            const grid = document.getElementById('bag-grid'); grid.innerHTML = '';
+            for(let i=1; i<=9; i++) {
+                const b = document.createElement('div'); b.className = 'bag-box'; b.innerHTML = `🛍️`;
+                b.onclick = () => {
+                    closeSelector();
+                    const pool = ITEMS[type], wKey = currentRole === 'admin' ? 'aW' : 'gW';
+                    let total = pool.reduce((s, i) => s + i[wKey], 0), r = Math.random() * total, win = pool[0];
+                    for (let i of pool) { if (r < i[wKey]) { win = i; break; } r -= i[wKey]; }
+                    pendingItem = { ...win, type: 'Túi Mù', time: new Date().toLocaleString('vi-VN') };
+                    showResult();
+                };
+                grid.appendChild(b);
+            }
+            document.getElementById('bag-selector').style.display = 'flex';
+        }
+        function closeSelector() { document.getElementById('bag-selector').style.display = 'none'; }
+
+        function showResult() {
+            document.getElementById('res-modal').style.display = 'flex';
+            document.getElementById('res-name').innerText = pendingItem.name;
+            document.getElementById('res-icon').innerText = pendingItem.icon;
+            confetti({ particleCount: 200, spread: 80 });
+            document.getElementById('admin-actions').style.display = currentRole === 'admin' ? 'block' : 'none';
+        }
+
+        function saveEntry(isSave) {
+            if(isSave && currentRole === 'admin') {
+                statsData.unshift(pendingItem);
+                localStorage.setItem('hanami_v7', JSON.stringify(statsData));
+                renderStats();
+            }
+            document.getElementById('res-modal').style.display = 'none';
+        }
+
+        function showPage(id, el) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-'+id).classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            el.classList.add('active');
+            if(id === 'stats') renderStats();
+        }
+
+        function renderStats() {
+            const table = document.getElementById('stat-table'); table.innerHTML = '';
+            let tRev = 0, tCost = 0;
+            statsData.forEach((s, i) => {
+                let rev = s.type === 'Túi Mù' ? 20000 : 0;
+                tRev += rev; tCost += s.cost;
+                table.innerHTML += `<tr><td>${s.time}</td><td>${s.type}</td><td>${s.icon} ${s.name}</td>
+                    <td><span style="color:var(--success)">+${rev/1000}k</span> / <span style="color:var(--accent)">-${s.cost/1000}k</span></td>
+                    <td><button onclick="delStat(${i})" style="background:#ef4444; color:white; border:none; border-radius:5px; padding:5px 10px; cursor:pointer;">XÓA</button></td></tr>`;
+            });
+            document.getElementById('total-rev').innerText = tRev.toLocaleString() + 'đ';
+            document.getElementById('total-cost').innerText = tCost.toLocaleString() + 'đ';
+            document.getElementById('total-profit').innerText = (tRev - tCost).toLocaleString() + 'đ';
+        }
+
+        function delStat(i) { statsData.splice(i, 1); localStorage.setItem('hanami_v7', JSON.stringify(statsData)); renderStats(); }
+
+        window.onload = drawWheel;
+    </script>
+</body>
+</html>
