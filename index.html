@@ -236,9 +236,40 @@
 
         function playWheel() {
             const canvas = document.getElementById('wheelCanvas');
-            let randomDeg = 4000 + Math.random() * 2000;
-            canvas.style.transition = 'transform 4s cubic-bezier(0.1, 0, 0.1, 1)';
-            canvas.style.transform = `rotate(${randomDeg}deg)`;
+            const pool = ITEMS['Wheel'];
+            const wKey = currentRole === 'admin' ? 'aW' : 'gW';
+    
+    // 1. Máy tính chọn quà trước
+    let total = pool.reduce((s, i) => s + i[wKey], 0);
+    let r = Math.random() * total;
+    let winnerIndex = 0;
+    let winner = pool[0];
+    for (let i = 0; i < pool.length; i++) {
+        if (r < pool[i][wKey]) {
+            winner = pool[i];
+            winnerIndex = i; // Lưu lại vị trí món quà trúng
+            break;
+        }
+        r -= pool[i][wKey];
+    }
+    pendingItem = { ...winner, type: 'Wheel', time: new Date().toLocaleTimeString() };
+
+    // 2. Tính toán góc quay để kim chỉ đúng ô winnerIndex
+    // Một vòng có 8 ô, mỗi ô 45 độ. Ta tính góc để ô trúng nằm ở đỉnh (vị trí 12h)
+    const extraDegree = 3600; // Quay ít nhất 10 vòng cho đẹp
+    const degreePerItem = 360 / 8; // 45 độ mỗi ô
+    // Công thức tính góc dừng sao cho mũi tên chỉ đúng ô trúng
+    const stopAt = extraDegree + (360 - (winnerIndex * degreePerItem)) - (degreePerItem / 2);
+
+    canvas.style.transition = 'transform 4s cubic-bezier(0.1, 0, 0.1, 1)';
+    canvas.style.transform = `rotate(${stopAt}deg)`;
+    
+    setTimeout(() => {
+        showResult();
+        canvas.style.transition = 'none';
+        canvas.style.transform = `rotate(${stopAt % 360}deg)`;
+    }, 4200);
+}
             
             setTimeout(() => {
                 const pool = ITEMS['Wheel'];
@@ -252,7 +283,7 @@
                 canvas.style.transition = 'none';
                 canvas.style.transform = 'rotate(0deg)';
             }, 4200);
-        }
+        
 
         function showResult() {
             document.getElementById('res-modal').style.display = 'flex';
@@ -302,9 +333,10 @@
         function delStat(i) { if(confirm('Xoá giao dịch này?')) { statsData.splice(i, 1); localStorage.setItem('hanami_v6', JSON.stringify(statsData)); renderStats(); } }
 
         function drawWheel() {
-            const ctx = document.getElementById('wheelCanvas').getContext('2d');
-            const labels = ["KẸO NGỌT", "VOUCHER 5K", "VOUCHER 10K", "MẤT LƯỢT", "KẸO NGỌT", "VOUCHER 5K","VOUCHER 10K", "MẤT LƯỢT"];
-            const colors = ['#6366f1', '#ec4899', '#8b5cf6', '#f43f5e', '#6366f1', '#ec4899', '#8b5cf6', '#f43f5e'];
+                const ctx = document.getElementById('wheelCanvas').getContext('2d');
+    // Thứ tự các ô quà tặng (Cần khớp 100% với mảng Wheel trong ITEMS)
+                const labels = ["KẸO MÚT", "VOUCHER 5K", "VOUCHER 10K", "MẤT LƯỢT", "KẸO MÚT", "VOUCHER 5K", "VOUCHER 10K", "MẤT LƯỢT"];
+                const colors = ['#6366f1', '#ec4899', '#8b5cf6', '#f43f5e', '#6366f1', '#ec4899', '#8b5cf6', '#f43f5e'];
             const arc = Math.PI / 4;
             for(let i=0; i<8; i++) {
                 ctx.beginPath(); ctx.fillStyle = colors[i];
