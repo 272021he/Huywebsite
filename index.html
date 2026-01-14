@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Huy ezgg - V5.1</title>
+    <title>Huy ezgg - V5.1 Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
@@ -12,42 +12,31 @@
             --primary: #6366f1; --accent: #ec4899; --success: #10b981;
             --text: #f8fafc; --border: rgba(255, 255, 255, 0.1);
         }
-        * { box-sizing: border-box; font-family: 'Inter', sans-serif; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+        * { box-sizing: border-box; font-family: 'Inter', sans-serif; -webkit-user-select: none; user-select: none; }
         body { margin: 0; background: var(--bg); color: var(--text); overflow: hidden; display: flex; height: 100vh; }
 
-        /* --- SIDEBAR --- */
         .sidebar { width: 260px; background: var(--sidebar); padding: 25px; border-right: 1px solid var(--border); display: flex; flex-direction: column; flex-shrink: 0; }
         .logo { font-size: 24px; font-weight: 800; color: var(--accent); margin-bottom: 40px; text-transform: uppercase; letter-spacing: 2px; }
         .nav-item { padding: 14px 18px; border-radius: 12px; cursor: pointer; color: #94a3b8; margin-bottom: 8px; transition: 0.3s; font-weight: 600; display: flex; align-items: center; gap: 10px; }
         .nav-item:hover { background: rgba(255,255,255,0.05); color: white; }
         .nav-item.active { background: var(--primary); color: white; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3); }
 
-        /* --- MAIN CONTENT --- */
         .main { flex: 1; padding: 40px; overflow-y: auto; background: #0b1120; }
         .page { display: none; animation: fadeIn 0.4s ease; }
         .page.active { display: block; }
 
-        /* --- WHEEL UI --- */
         .wheel-box { position: relative; width: 320px; height: 320px; margin: 20px auto; }
         #wheelCanvas { width: 100%; height: 100%; border-radius: 50%; box-shadow: 0 0 50px rgba(99, 102, 241, 0.2); border: 10px solid #334155; }
         .wheel-arrow { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); z-index: 10; font-size: 40px; color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.5); }
 
-        /* --- GRID & CARDS --- */
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
         .card { background: var(--card); border-radius: 20px; padding: 30px; border: 1px solid var(--border); }
         
-        /* --- 9 TÚI MÙ --- */
         .bag-selector-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.96); z-index: 9999; display: none; flex-direction: column; align-items: center; justify-content: center; }
         .bag-grid-9 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px; }
-        .bag-box { 
-            width: 100px; height: 130px; background: linear-gradient(135deg, #f472b6, #db2777); 
-            border-radius: 15px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            font-size: 40px; box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-            animation: bounce 0.6s infinite alternate; transition: 0.3s;
-        }
+        .bag-box { width: 100px; height: 130px; background: linear-gradient(135deg, #f472b6, #db2777); border-radius: 15px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 40px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); animation: bounce 0.6s infinite alternate; transition: 0.3s; }
         .bag-box:hover { transform: scale(1.1) !important; filter: brightness(1.2); animation-play-state: paused; }
 
-        /* --- THỐNG KÊ --- */
         .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px; }
         .stat-card { background: var(--sidebar); padding: 25px; border-radius: 16px; border-top: 4px solid var(--primary); }
         .stat-title { color: #94a3b8; font-size: 14px; margin-bottom: 10px; font-weight: 600; }
@@ -60,7 +49,6 @@
         @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-20px); } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- AUTH --- */
         #auth-screen { position: fixed; inset: 0; background: var(--bg); z-index: 10000; display: flex; align-items: center; justify-content: center; }
         .btn { width: 100%; padding: 14px; border: none; border-radius: 12px; cursor: pointer; font-weight: 800; transition: 0.2s; margin-top: 10px; text-transform: uppercase; }
         .btn:active { transform: scale(0.98); }
@@ -119,18 +107,9 @@
         <div id="page-stats" class="page">
             <h2 style="margin-top:0">Báo cáo tài chính</h2>
             <div class="stat-grid">
-                <div class="stat-card" style="border-color: var(--success);">
-                    <div class="stat-title">DOANH THU TÚI MÙ</div>
-                    <div class="stat-val" id="rev-bag" style="color: var(--success);">0đ</div>
-                </div>
-                <div class="stat-card" style="border-color: var(--accent);">
-                    <div class="stat-title">VỐN QUÀ VÒNG QUAY</div>
-                    <div class="stat-val" id="cost-wheel" style="color: var(--accent);">0đ</div>
-                </div>
-                <div class="stat-card" style="border-color: var(--primary);">
-                    <div class="stat-title">LỢI NHUẬN RÒNG</div>
-                    <div class="stat-val" id="total-profit" style="color: var(--primary);">0đ</div>
-                </div>
+                <div class="stat-card" style="border-color: var(--success);"><div class="stat-title">DOANH THU TÚI MÙ</div><div class="stat-val" id="rev-bag" style="color: var(--success);">0đ</div></div>
+                <div class="stat-card" style="border-color: var(--accent);"><div class="stat-title">VỐN QUÀ VÒNG QUAY</div><div class="stat-val" id="cost-wheel" style="color: var(--accent);">0đ</div></div>
+                <div class="stat-card" style="border-color: var(--primary);"><div class="stat-title">LỢI NHUẬN RÒNG</div><div class="stat-val" id="total-profit" style="color: var(--primary);">0đ</div></div>
             </div>
             <table>
                 <thead><tr><th>Thời gian</th><th>Loại hình</th><th>Quà tặng</th><th>Biến động (Thu/Vốn)</th><th>Thao tác</th></tr></thead>
@@ -163,7 +142,6 @@
     </div>
 
     <script>
-        // Cấu hình vật phẩm & tỉ lệ (Lời 1/3: Vốn ~13k/bán 20k)
         const ITEMS = {
             'Nước': [
                 { name: "Trà tắc mật ong", cost: 8000, gW: 15, aW: 75, icon: "🍹" },
@@ -181,22 +159,21 @@
                 { name: "Chè bưởi An Giang", cost: 17000, gW: 50, aW: 5, icon: "🥣" }
             ],
             'Wheel': [
-    { name: "Kẹo mút", cost: 1000, gW: 20, aW: 40, icon: "🍭" },
-    { name: "Voucher giảm 5k", cost: 5000, gW: 30, aW: 20, icon: "🎟️" },
-    { name: "Voucher giảm 10k", cost: 10000, gW: 10, aW: 5, icon: "🎟️" },
-    { name: "Mất lượt", cost: 0, gW: 40, aW: 35, icon: "❌" },
-    { name: "Kẹo mút", cost: 1000, gW: 20, aW: 40, icon: "🍭" },
-    { name: "Voucher giảm 5k", cost: 5000, gW: 30, aW: 20, icon: "🎟️" },
-    { name: "Voucher giảm 10k", cost: 10000, gW: 10, aW: 5, icon: "🎟️" },
-    { name: "Mất lượt", cost: 0, gW: 40, aW: 35, icon: "❌" }
-]
+                { name: "Kẹo mút", cost: 1000, gW: 20, aW: 40, icon: "🍭" },
+                { name: "Voucher giảm 5k", cost: 5000, gW: 30, aW: 20, icon: "🎟️" },
+                { name: "Voucher giảm 10k", cost: 10000, gW: 10, aW: 5, icon: "🎟️" },
+                { name: "Mất lượt", cost: 0, gW: 40, aW: 35, icon: "❌" },
+                { name: "Kẹo mút", cost: 1000, gW: 20, aW: 40, icon: "🍭" },
+                { name: "Voucher giảm 5k", cost: 5000, gW: 30, aW: 20, icon: "🎟️" },
+                { name: "Voucher giảm 10k", cost: 10000, gW: 10, aW: 5, icon: "🎟️" },
+                { name: "Mất lượt", cost: 0, gW: 40, aW: 35, icon: "❌" }
+            ]
         };
 
         let currentRole = 'guest';
         let statsData = JSON.parse(localStorage.getItem('hanami_v6')) || [];
         let pendingItem = null;
 
-        // BẢO MẬT PHÍM TẮT
         document.onkeydown = (e) => { 
             if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 85)) return false; 
         };
@@ -210,7 +187,66 @@
                 document.getElementById('role-tag').innerText = 'Chế độ: 🔑 Chủ Quán';
             }
             document.getElementById('auth-screen').style.display = 'none';
-            drawWheel();
+            // Gọi hàm vẽ, KHÔNG gọi hàm play. Đảm bảo canvas ở trạng thái tĩnh.
+            drawWheel(); 
+        }
+
+        function drawWheel() {
+            const canvas = document.getElementById('wheelCanvas');
+            const ctx = canvas.getContext('2d');
+            const labels = ["KẸO MÚT", "VOUCHER 5K", "VOUCHER 10K", "MẤT LƯỢT", "KẸO MÚT", "VOUCHER 5K", "VOUCHER 10K", "MẤT LƯỢT"];
+            const colors = ['#6366f1', '#ec4899', '#8b5cf6', '#f43f5e', '#6366f1', '#ec4899', '#8b5cf6', '#f43f5e'];
+            const arc = Math.PI / 4; 
+            
+            ctx.clearRect(0, 0, 320, 320);
+            canvas.style.transition = 'none'; // Tắt mọi chuyển động khi vẽ lại
+            canvas.style.transform = 'rotate(0deg)'; // Reset góc về 0
+
+            for(let i=0; i<8; i++) {
+                ctx.beginPath();
+                ctx.fillStyle = colors[i];
+                ctx.moveTo(160, 160);
+                ctx.arc(160, 160, 150, i * arc, (i + 1) * arc);
+                ctx.fill();
+                ctx.save();
+                ctx.translate(160, 160);
+                ctx.rotate(i * arc + arc / 2);
+                ctx.fillStyle = "white";
+                ctx.font = "bold 10px Inter";
+                ctx.textAlign = "right";
+                ctx.fillText(labels[i], 140, 5);
+                ctx.restore();
+            }
+        }
+
+        function playWheel() {
+            const canvas = document.getElementById('wheelCanvas');
+            const pool = ITEMS['Wheel'];
+            const wKey = currentRole === 'admin' ? 'aW' : 'gW';
+            
+            let total = pool.reduce((s, i) => s + i[wKey], 0);
+            let r = Math.random() * total;
+            let winnerIndex = 0;
+            for (let i = 0; i < pool.length; i++) {
+                if (r < pool[i][wKey]) { winnerIndex = i; break; }
+                r -= pool[i][wKey];
+            }
+            pendingItem = { ...pool[winnerIndex], type: 'Wheel', time: new Date().toLocaleTimeString() };
+
+            const extraSpins = 3600; 
+            const degreePerItem = 360 / 8; 
+            // Công thức chuẩn: Quay nhiều vòng + Tính vị trí ô + Bù 90 độ vì kim ở vị trí 12h
+            const targetDegree = extraSpins + (360 - (winnerIndex * degreePerItem)) - (degreePerItem / 2) - 90;
+
+            canvas.style.transition = 'transform 4s cubic-bezier(0.1, 0, 0.1, 1)';
+            canvas.style.transform = `rotate(${targetDegree}deg)`;
+            
+            setTimeout(() => {
+                showResult();
+                const finalAngle = targetDegree % 360;
+                canvas.style.transition = 'none';
+                canvas.style.transform = `rotate(${finalAngle}deg)`;
+            }, 4200);
         }
 
         function openSelector(type) {
@@ -238,44 +274,6 @@
             pendingItem = { ...winner, type: 'Bag', time: new Date().toLocaleTimeString() };
             showResult();
         }
-
-        function playWheel() {
-    const canvas = document.getElementById('wheelCanvas');
-    const pool = ITEMS['Wheel'];
-    const wKey = currentRole === 'admin' ? 'aW' : 'gW';
-    
-    // 1. Máy tính tính toán quà trúng trước
-    let total = pool.reduce((s, i) => s + i[wKey], 0);
-    let r = Math.random() * total;
-    let winnerIndex = 0;
-    for (let i = 0; i < pool.length; i++) {
-        if (r < pool[i][wKey]) {
-            winnerIndex = i;
-            break;
-        }
-        r -= pool[i][wKey];
-    }
-    pendingItem = { ...pool[winnerIndex], type: 'Wheel', time: new Date().toLocaleTimeString() };
-
-    // 2. Tính góc quay
-    // Mỗi ô rộng 45 độ. Kim ở đỉnh (vị trí -90 độ so với góc 0 của canvas)
-    const extraSpins = 3600; // Quay 10 vòng
-    const degreePerItem = 360 / 8; // 45 độ
-    // Công thức tính toán để ô winnerIndex dừng ngay dưới kim chỉ
-    const targetDegree = extraSpins + (360 - (winnerIndex * degreePerItem)) - (degreePerItem / 2) - 90;
-
-    canvas.style.transition = 'transform 4s cubic-bezier(0.1, 0, 0.1, 1)';
-    canvas.style.transform = `rotate(${targetDegree}deg)`;
-    
-    setTimeout(() => {
-        showResult();
-        // Giữ nguyên vị trí sau khi quay xong để nhìn cho thật
-        const finalAngle = targetDegree % 360;
-        canvas.style.transition = 'none';
-        canvas.style.transform = `rotate(${finalAngle}deg)`;
-    }, 4200);
-}
-        
 
         function showResult() {
             document.getElementById('res-modal').style.display = 'flex';
@@ -323,30 +321,6 @@
         }
 
         function delStat(i) { if(confirm('Xoá giao dịch này?')) { statsData.splice(i, 1); localStorage.setItem('hanami_v6', JSON.stringify(statsData)); renderStats(); } }
-
-        function drawWheel() {
-    const ctx = document.getElementById('wheelCanvas').getContext('2d');
-    const labels = ["KẸO MÚT", "VOUCHER 5K", "VOUCHER 10K", "MẤT LƯỢT", "KẸO MÚT", "VOUCHER 5K", "VOUCHER 10K", "MẤT LƯỢT"];
-    const colors = ['#6366f1', '#ec4899', '#8b5cf6', '#f43f5e', '#6366f1', '#ec4899', '#8b5cf6', '#f43f5e'];
-    const arc = Math.PI / 4; // 45 độ mỗi ô
-    
-    ctx.clearRect(0, 0, 320, 320); // Xóa để vẽ lại sạch sẽ
-    for(let i=0; i<8; i++) {
-        ctx.beginPath();
-        ctx.fillStyle = colors[i];
-        ctx.moveTo(160, 160);
-        ctx.arc(160, 160, 150, i * arc, (i + 1) * arc);
-        ctx.fill();
-        ctx.save();
-        ctx.translate(160, 160);
-        ctx.rotate(i * arc + arc / 2);
-        ctx.fillStyle = "white";
-        ctx.font = "bold 10px Inter";
-        ctx.textAlign = "right";
-        ctx.fillText(labels[i], 140, 5);
-        ctx.restore();
-    }
-}
     </script>
 </body>
 </html>
