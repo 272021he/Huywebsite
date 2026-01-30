@@ -1795,17 +1795,9 @@
 
     <div id="menu-modal" class="overlay" onclick="hideMenuModal(event)">
         <div class="modal" onclick="event.stopPropagation()">
-            <h2>📜 THỰC ĐƠN LỄ HỘI</h2>
+            <h2>📜 THỰC ĐƠN</h2>
             <div class="menu-content" id="menu-content">
                 <!-- Menu sẽ được tạo động bằng JavaScript -->
-            </div>
-            <div style="text-align: center; margin-bottom: 15px;">
-                <small style="color: var(--text-dim);">
-                    <span style="color:#34d399;">●</span> Còn nhiều 
-                    <span style="color:#fbbf24;">●</span> Vừa phải 
-                    <span style="color:#fecaca;">●</span> Sắp hết 
-                    <span style="color:#9ca3af;">●</span> Hết hàng
-                </small>
             </div>
             <button class="btn btn-primary" onclick="hideMenuModal()">ĐÓNG THỰC ĐƠN</button>
         </div>
@@ -1833,10 +1825,12 @@
             <div id="res-icon">🎁</div>
             <h3 id="res-name">---</h3>
             <div id="res-wish"></div>
+            <!--
             <div id="admin-actions" style="display:none; margin-top: 15px;">
                 <button class="btn" style="background:var(--success); margin-bottom:10px; color:white;" onclick="saveEntry(true)">💰 LƯU DOANH THU</button>
                 <button class="btn" style="background:var(--accent); margin-bottom:10px; color:white;" onclick="refundCurrentItem()">↩️ HOÀN TIỀN & HOÀN MÓN</button>
             </div>
+            -->
             <button class="btn btn-primary" style="background:#334155; color:white; margin-top: 15px;" onclick="saveEntry(false)">ĐÓNG</button>
         </div>
     </div>
@@ -1862,7 +1856,7 @@
         };
 
         // ==================== PHẦN QUAN TRỌNG: TỰ ĐỘNG RESET KHI CÓ THAY ĐỔI ====================
-        const MENU_VERSION = '2.0'; // Tăng version này mỗi khi bạn thay đổi menu
+        const MENU_VERSION = '2.1'; // Tăng version này mỗi khi bạn thay đổi menu
         const SAVED_VERSION = localStorage.getItem('tet_menu_version');
 
         // Nếu version cũ khác version mới, xóa dữ liệu cũ
@@ -1874,44 +1868,47 @@
             console.log('✅ Đã cập nhật menu phiên bản mới:', MENU_VERSION);
         }
 
-        // DỮ LIỆU SẢN PHẨM
-        // ==================== DỮ LIỆU SẢN PHẨM CÓ SỐ LƯỢNG ====================
-        const MENU_ITEMS = {
-            'Nước Giải Khát': [
-                {id: 'drink1', name: "Nước sâm", cost: 10000, stock: 100, icon: "🥤", desc: "Nước sâm mát lạnh"},
-                {id: 'drink2', name: "Trà tắc", cost: 15000, stock: 100, icon: "🍋", desc: "Trà tắc thơm ngon"},
-                {id: 'drink3', name: "???", cost: '???k', stock: 0, icon: "🥤", desc: "Đang cập nhật..."}
-            ],
-            'Đồ Ăn Vặt': [
-                {id: 'food1', name: "Bánh lọc", cost: 5000, stock: 100, icon: "🌯", desc: "Bánh lọc Huế"},
-                {id: 'food2', name: "Bắp xào", cost: 15000, stock: 100, icon: "🌽", desc: "Bắp xào thơm ngon"},
-                {id: 'food3', name: "Khoai Tây Chiên", cost: 15000, stock: 100, icon: "🍟", desc: "Giòn tan sốt đặc biệt"}
-            ]
-        };
+                // DỮ LIỆU SẢN PHẨM
+                // ==================== DỮ LIỆU SẢN PHẨM CÓ SỐ LƯỢNG ====================
+            const MENU_ITEMS = {
+                'Nước Giải Khát': [
+                    {id: 'nước_sâm_001', name: "Nước sâm", cost: 10000, stock: 100, icon: "🥤", desc:"Nước sâm mát lạnh"},
+                    {id: 'trà_tắc_002', name: "Trà tắc", cost: 15000, stock: 100, icon: "🍋", desc:"Trà tắc thơm ngon"},
+                ],
+                'Đồ Ăn Vặt': [
+                    {id: 'bánh_lọc_001', name: "Bánh lọc", cost: 5000, stock: 200, icon: "🌯", desc: "Bánh lọc Huế"},
+                    {id: 'bắp_xào_002', name: "Bắp xào", cost: 15000, stock: 75, icon: "🌽", desc: "Bắp xào thơm ngon"},
+                    {id: 'khoai_tây_003', name: "Khoai Tây Chiên", cost: 15000, stock: 70, icon: "🍟", desc: "Giòn tan sốt đặc biệt"},
+                    {id: 'xúc_xích_004', name: "Xúc xích", cost: '???k', stock: 50, icon: "🌭", desc: "Xúc xích nướng thơm lừng"},
+                    {id: 'cá_viên_005', name: "Cá viên chiên", cost: '???k', stock: 50, icon: "🐟", desc: "Cá viên chiên giòn rụm"},
+                    {id: 'bắp_nổ_006', name: "Bắp nổ", cost: '???k', stock: 100, icon: "🍿", desc: "Bắp nổ bơ thơm ngon"},
+                    {id: 'khô_heo_007', name: "Khô heo", cost: '???k', stock: 50, icon: "🥓", desc: "Khô heo cay cay"},
+                    {id: 'xôi_mặn_008', name: "Xôi mặn", cost: '???k', stock: 15, icon: "🍚", desc: "Xôi mặn đậm đà"}
+                ]
+            };
 
-        // Dữ liệu cho túi mù - ĐÃ CẬP NHẬT ĐỂ ĐỒNG BỘ VỚI MENU
-        const ITEMS = {
-            'Nước': [ 
-                {name: "Nước sâm", cost: 10000, stock: 100, icon: "🥤", desc:"Nước sâm mát lạnh", menuId: 'drink1'}, 
-                {name: "Trà tắc", cost: 15000, stock: 100, icon: "🍋", desc:"Trà tắc thơm ngon", menuId: 'drink2'}, 
-                {name:"???", cost:0, gW:0, aW:0, icon:"🥤", desc:"Đang cập nhật...", menuId: 'drink3'} 
-            ],
-            'Đồ Ăn': [ 
-                {name:"Bánh lọc", cost:5000, gW:33, aW:33, icon:"🌯", desc:"Bánh lọc Huế", menuId: 'food1'}, 
-                {name:"Bắp xào", cost:15000, gW:33, aW:33, icon:"🌽", desc:"Bắp xào thơm ngon", menuId: 'food2'}, 
-                {name:"Khoai Tây Chiên", cost:15000, gW:34, aW:34, icon:"🍟", desc:"Giòn tan sốt đặc biệt", menuId: 'food3'} 
-            ],
-            'Wheel': [
-                {name:"Kẹo", cost:1000, gW:10, aW:40, icon:"🍬", desc:"Ngọt ngào ngày Tết"}, 
-                {name:"Voucher 5k", cost:5000, gW:35, aW:20, icon:"🎟️", desc:"Giảm 5k món bất kỳ"},
-                {name:"Voucher 10k", cost:10000, gW:50, aW:10, icon:"🎟️", desc:"Giảm 10k món đặc biệt"}, 
-                {name:"Mất lượt", cost:0, gW:5, aW:30, icon:"😭", desc:"Chúc bạn may mắn lần sau"},
-                {name:"Kẹo", cost:1000, gW:20, aW:40, icon:"🍬", desc:"Ngọt ngào ngày Tết"}, 
-                {name:"Voucher 5k", cost:5000, gW:30, aW:20, icon:"🎟️", desc:"Giảm 5k món bất kỳ"},
-                {name:"Voucher 10k", cost:10000, gW:40, aW:10, icon:"🎟️", desc:"Giảm 10k món đặc biệt"}, 
-                {name:"Mất lượt", cost:0, gW:5, aW:30, icon:"😭", desc:"Chúc bạn may mắn lần sau"}
-            ]
-        };
+            // VÀ SỬA LUÔN ITEMS:
+            const ITEMS = {
+                'Nước': [ 
+                    {name: "Nước sâm", cost: 10000, gW: 50, aW: 50, icon: "🥤", desc:"Nước sâm mát lạnh", menuId: 'nước_sâm_001'},
+                    {name: "Trà tắc", cost: 15000, gW: 40, aW: 40, icon: "🍋", desc:"Trà tắc thơm ngon", menuId: 'trà_tắc_002'},
+                ],
+                'Đồ Ăn': [ 
+                    {name: "Bánh lọc", cost: 5000, gW: 33, aW: 33, icon: "🌯", desc:"Bánh lọc Huế", menuId: 'bánh_lọc_001'},
+                    {name: "Bắp xào", cost: 15000, gW: 33, aW: 33, icon: "🌽", desc:"Bắp xào thơm ngon", menuId: 'bắp_xào_002'},
+                    {name: "Khoai Tây Chiên", cost: 15000, gW: 34, aW: 34, icon: "🍟", desc:"Giòn tan sốt đặc biệt", menuId: 'khoai_tây_003'}
+                ],
+                'Wheel': [
+                    {name: "Kẹo", cost: 1000, gW: 10, aW: 40, icon: "🍬", desc: "Ngọt ngào ngày Tết"},
+                    {name: "Voucher 5k", cost: 5000, gW: 35, aW: 20, icon: "🎟️", desc: "Giảm 5k món bất kỳ"},
+                    {name: "Voucher 10k", cost: 10000, gW: 50, aW: 10, icon: "🎟️", desc: "Giảm 10k món đặc biệt"},
+                    {name: "Mất lượt", cost: 0, gW: 5, aW: 30, icon: "😭", desc: "Chúc bạn may mắn lần sau"},
+                    {name: "Kẹo", cost: 1000, gW: 20, aW: 40, icon: "🍬", desc: "Ngọt ngào ngày Tết"},
+                    {name: "Voucher 5k", cost: 5000, gW: 30, aW: 20, icon: "🎟️", desc: "Giảm 5k món bất kỳ"},
+                    {name: "Voucher 10k", cost: 10000, gW: 40, aW: 10, icon: "🎟️", desc: "Giảm 10k món đặc biệt"},
+                    {name: "Mất lượt", cost: 0, gW: 5, aW: 30, icon: "😭", desc: "Chúc bạn may mắn lần sau"}
+                ]
+            };
 
         // LỜI CHÚC TẾT
         const TET_WISHES = [
@@ -1953,8 +1950,12 @@
         // ==================== HÀM QUẢN LÝ MENU ====================
         // Hiển thị menu với số lượng tồn kho
         function renderMenu() {
+            
             const menuContent = document.getElementById('menu-content');
             if (!menuContent) return;
+            
+             console.log("🔍 [DEBUG] MENU_ITEMS:", MENU_ITEMS);
+            console.log("🔍 [DEBUG] Món nước:", MENU_ITEMS['Nước Giải Khát']);
             
             menuContent.innerHTML = '';
             
@@ -2310,9 +2311,12 @@
         }
 
         // ==================== HÀM HOÀN TRẢ KHI XÓA GIAO DỊCH ====================
+        // HÀM HOÀN TRẢ KHI XÓA GIAO DỊCH
         function refundStock(item) {
-            // Kiểm tra xem item có menuId không
-            if (!item || !item.menuId) return false;
+            // Kiểm tra xem item có menuId không và chỉ admin mới hoàn trả
+            if (!item || !item.menuId || !isAdmin) return false;
+    
+    // ... phần còn lại giữ nguyên
             
             // Tìm item trong MENU_ITEMS
             for (const category in MENU_ITEMS) {
@@ -2370,27 +2374,12 @@
         }
 
         // ==================== CẬP NHẬT HÀM LƯU DOANH THU ====================
-        function saveEntry(save) {
-            if (save && isAdmin && pending) {
-                // Thêm vào thống kê
-                stats.unshift(pending);
-                localStorage.setItem('tet_8_1_food', JSON.stringify(stats));
-                
-                // GIẢM SỐ LƯỢNG TỒN KHO nếu có menuId
-                if (pending.menuId) {
-                    const success = decreaseStock(pending.menuId, 1);
-                    if (success) {
-                        console.log(`✅ Đã lưu doanh thu và giảm số lượng ${pending.name} trong kho`);
-                    }
-                } else {
-                    // Vòng quay không có menuId
-                    console.log(`✅ Đã lưu doanh thu vòng quay: ${pending.name}`);
-                }
-                
-                // Cập nhật thống kê ngay lập tức
-                renderStats();
-            }
-            
+        
+// HÀM ĐÓNG MODAL - ĐÃ ĐƠN GIẢN HÓA
+        function saveEntry() {
+            // Chỉ đóng modal, không làm gì khác vì đã tự động lưu trong showResult()
+            document.getElementById('res-modal').style.display = 'none';
+            pending = null; // Reset pending
             // Đóng modal
             document.getElementById('res-modal').style.display = 'none';
             pending = null; // Reset pending
@@ -2791,7 +2780,7 @@
             }
         }
 
-        // HIỂN THỊ KẾT QUẢ
+        // HIỂN THỊ KẾT QUẢ - SỬA LẠI ĐÚNG
         function showResult() {
             document.getElementById('res-name').innerText = pending.name;
             document.getElementById('res-icon').innerText = pending.icon;
@@ -2801,8 +2790,27 @@
             
             document.getElementById('res-modal').style.display = 'flex';
             
+            // CHỈ ADMIN MỚI LƯU STATS VÀ GIẢM TỒN KHO
+            if (pending && isAdmin) {
+                // Thêm vào thống kê
+                stats.unshift(pending);
+                localStorage.setItem('tet_8_1_food', JSON.stringify(stats));
+                
+                // GIẢM SỐ LƯỢNG TỒN KHO nếu có menuId
+                if (pending.menuId) {
+                    decreaseStock(pending.menuId, 1);
+                }
+                
+                // Cập nhật thống kê ngay lập tức
+                renderStats();
+                console.log(`✅ ADMIN: Đã lưu ${pending.name} vào thống kê và giảm tồn kho`);
+            } else if (pending && !isAdmin) {
+                // KHÁCH: KHÔNG làm gì cả, chỉ chơi thử
+                console.log(`👤 KHÁCH: ${pending.name} - Chỉ chơi thử, không lưu stats và không giảm tồn kho`);
+            }
+            
             // PHÁO HOA THEO KẾT QUẢ
-            if(pending.cost > 0) {
+            if(pending && pending.cost > 0) {
                 confetti({
                     particleCount: 150,
                     spread: 90,
@@ -2810,7 +2818,7 @@
                     colors: ['#fbbf24', '#34d399', '#ffffff'],
                     startVelocity: 45
                 });
-            } else {
+            } else if(pending) {
                 confetti({
                     particleCount: 80,
                     spread: 60,
@@ -2819,9 +2827,8 @@
                     startVelocity: 30
                 });
             }
-            
-            document.getElementById('admin-actions').style.display = isAdmin ? 'block' : 'none';
         }
+
 
         // XÓA MỘT MỤC THỐNG KÊ
         function deleteStat(index) {
