@@ -48,7 +48,7 @@
         }
         
         html, body {
-            overscroll-behavior: none;
+        overscroll-behavior: auto; /* hoặc xóa hoàn toàn */
         }
         
         html {
@@ -58,19 +58,20 @@
         }
         
         body { 
-            margin: 0; 
-            padding: 0;
-            background: var(--bg); 
-            background-image: var(--bg-gradient);
-            color: var(--text); 
-            min-height: 100vh;
-            min-height: -webkit-fill-available;
-            display: flex; 
-            flex-direction: column; 
-            overflow-x: hidden;
-            position: relative;
-            -webkit-text-size-adjust: 100%;
-            touch-action: manipulation;
+        margin: 0; 
+        padding: 0;
+        background: var(--bg); 
+        background-image: var(--bg-gradient);
+        color: var(--text); 
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+        display: flex; 
+        flex-direction: column; 
+        overflow-x: hidden;
+        overflow-y: auto; /* THÊM DÒNG NÀY */
+        position: relative;
+        -webkit-text-size-adjust: 100%;
+        touch-action: pan-y; /* THAY ĐỔI manipulation thành pan-y */
         }
 
         /* --- INTRO SCREEN RESPONSIVE --- */
