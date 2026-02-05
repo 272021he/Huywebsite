@@ -1874,17 +1874,17 @@
             const MENU_ITEMS = {
                 'Nước Giải Khát': [
                     {id: 'nước_sâm_001', name: "Nước sâm", cost: 10000, stock: 100, icon: "🥤", desc:"Nước sâm mát lạnh"},
-                    {id: 'trà_tắc_002', name: "Trà tắc", cost: 15000, stock: 100, icon: "🍋", desc:"Trà tắc thơm ngon"},
+                    {id: 'trà_tắc_002', name: "Trà tắc", cost: 10000, stock: 100, icon: "🍋", desc:"Trà tắc thơm ngon"},
                 ],
                 'Đồ Ăn Vặt': [
-                    {id: 'bánh_lọc_001', name: "Bánh lọc", cost: 5000, stock: 200, icon: "🌯", desc: "Bánh lọc Huế"},
-                    {id: 'bắp_xào_002', name: "Bắp xào", cost: 15000, stock: 75, icon: "🌽", desc: "Bắp xào thơm ngon"},
-                    {id: 'khoai_tây_003', name: "Khoai Tây Chiên", cost: 15000, stock: 70, icon: "🍟", desc: "Giòn tan sốt đặc biệt"},
-                    {id: 'xúc_xích_004', name: "Xúc xích", cost: '???k', stock: 50, icon: "🌭", desc: "Xúc xích nướng thơm lừng"},
-                    {id: 'cá_viên_005', name: "Cá viên chiên", cost: '???k', stock: 50, icon: "🐟", desc: "Cá viên chiên giòn rụm"},
-                    {id: 'bắp_nổ_006', name: "Bắp nổ", cost: '???k', stock: 100, icon: "🍿", desc: "Bắp nổ bơ thơm ngon"},
-                    {id: 'khô_heo_007', name: "Khô heo", cost: '???k', stock: 50, icon: "🥓", desc: "Khô heo cay cay"},
-                    {id: 'xôi_mặn_008', name: "Xôi mặn", cost: '???k', stock: 15, icon: "🍚", desc: "Xôi mặn đậm đà"}
+                    {id: 'bánh_lọc_001', name: "Bánh lọc", cost: 5000, stock: 200, icon: "🌯", desc: "Bánh lọc"},
+                    {id: 'bắp_xào_002', name: "Bắp xào", cost: 20000, stock: 75, icon: "🌽", desc: "Bắp xào thơm ngon"},
+                    {id: 'khoai_tây_003', name: "Khoai Tây lắc phô mai", cost: 20000, stock: 70, icon: "🍟", desc: "Giòn tan"},
+                    {id: 'xôi_truyền_thống_004', name: "Xôi truyền thống", cost: 15000, stock: 50, icon: "🌭", desc: "Xúc xích nướng thơm lừng"},
+                    {id: 'bắp_rang_bơ_005', name: "Bắp rang bơ", cost: 10000, stock: 50, icon: "🍿", desc: "Bắp rang bơ thơm ngon"},
+                    {id: 'khoai_tây_chấm_006', name: "Khoai tây chấm tương", cost: 15000, stock: 100, icon: "🍟", desc: "Giòn tan sốt đặc biệt"},
+                    {id: 'khô_gà_007', name: "Khô gà", cost: 15000, stock: 50, icon: "🥓", desc: "Khô gà dai dai"},
+                    {id: 'xôi_mặn_008', name: "Xôi mặn", cost: 15000, stock: 15, icon: "🍚", desc: "Xôi mặn đậm đà"}
                 ]
             };
 
@@ -1897,17 +1897,17 @@
                 'Đồ Ăn': [ 
                     {name: "Bánh lọc", cost: 5000, gW: 33, aW: 33, icon: "🌯", desc:"Bánh lọc Huế", menuId: 'bánh_lọc_001'},
                     {name: "Bắp xào", cost: 15000, gW: 33, aW: 33, icon: "🌽", desc:"Bắp xào thơm ngon", menuId: 'bắp_xào_002'},
-                    {name: "Khoai Tây Chiên", cost: 15000, gW: 34, aW: 34, icon: "🍟", desc:"Giòn tan sốt đặc biệt", menuId: 'khoai_tây_003'}
+                    {name: "Khoai Tây chấm tương", cost: 15000, gW: 34, aW: 34, icon: "🍟", desc:"Giòn tan sốt đặc biệt", menuId: 'khoai_tây_003'}
                 ],
                 'Wheel': [
                     {name: "Kẹo", cost: 1000, gW: 10, aW: 40, icon: "🍬", desc: "Ngọt ngào ngày Tết"},
                     {name: "Voucher 5k", cost: 5000, gW: 35, aW: 20, icon: "🎟️", desc: "Giảm 5k món bất kỳ"},
                     {name: "Voucher 10k", cost: 10000, gW: 50, aW: 10, icon: "🎟️", desc: "Giảm 10k món đặc biệt"},
-                    {name: "Mất lượt", cost: 0, gW: 5, aW: 30, icon: "😭", desc: "Chúc bạn may mắn lần sau"},
+                    {name: "Chúc bạn may mắn lần sau", cost: 0, gW: 5, aW: 30, icon: "🍀", desc: "Chúc bạn may mắn lần sau"}
                     {name: "Kẹo", cost: 1000, gW: 20, aW: 40, icon: "🍬", desc: "Ngọt ngào ngày Tết"},
                     {name: "Voucher 5k", cost: 5000, gW: 30, aW: 20, icon: "🎟️", desc: "Giảm 5k món bất kỳ"},
                     {name: "Voucher 10k", cost: 10000, gW: 40, aW: 10, icon: "🎟️", desc: "Giảm 10k món đặc biệt"},
-                    {name: "Mất lượt", cost: 0, gW: 5, aW: 30, icon: "😭", desc: "Chúc bạn may mắn lần sau"}
+                    {name: "Chúc bạn may mắn lần sau", cost: 0, gW: 5, aW: 30, icon: "🍀", desc: "Chúc bạn may mắn lần sau"}
                 ]
             };
 
@@ -3001,5 +3001,6 @@
         };
     </script>
 </body>
+
 
 </html>
