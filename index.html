@@ -247,7 +247,6 @@
         .food-icon-item:nth-child(3) { animation-delay: 1s; }
         .food-icon-item:nth-child(4) { animation-delay: 1.5s; }
         .food-icon-item:nth-child(5) { animation-delay: 2s; }
-        .food-icon-item:nth-child(6) { animation-delay: 2.5s; }
 
         @keyframes foodFloat {
             0%, 100% { transform: translateY(0) rotate(0deg); }
@@ -466,60 +465,6 @@
             margin: 0 auto;
         }
 
-        /* Banner món đặc biệt mobile */
-        .special-banner {
-            background: linear-gradient(90deg, var(--food-red), var(--food-gold));
-            border-radius: 12px;
-            padding: 10px 15px;
-            margin: 15px auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            animation: pulse 2s infinite;
-            border: 2px solid var(--primary);
-            box-shadow: 0 3px 10px rgba(220, 38, 38, 0.3);
-            text-align: center;
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .special-banner > div:first-child {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .special-banner > div:first-child > div:first-child {
-            font-size: 1.8rem;
-        }
-
-        .special-banner > div:first-child > div:nth-child(2) {
-            text-align: left;
-        }
-
-        .special-banner > div:first-child > div:nth-child(2) > div:first-child {
-            font-weight: bold;
-            font-size: 1rem;
-        }
-
-        .special-banner > div:first-child > div:nth-child(2) > div:nth-child(2) {
-            font-size: 0.85rem;
-        }
-
-        .special-banner button {
-            background: white;
-            color: var(--food-red);
-            border: none;
-            padding: 8px 20px;
-            border-radius: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 0.9rem;
-            min-width: 120px;
-        }
-
         @keyframes pulse { 
             0% { transform: scale(1); } 
             50% { transform: scale(1.01); } 
@@ -657,36 +602,6 @@
             font-size: 2rem; 
             color: var(--primary); 
             text-shadow: 0 2px 4px black;
-        }
-
-        /* --- BAG SCREEN RESPONSIVE --- */
-        .game-container {
-            text-align: center;
-            padding: 0 10px;
-        }
-
-        .game-container h2 {
-            color: var(--primary);
-            font-family: var(--font-tet);
-            font-size: 1.5rem;
-            margin: 10px 0;
-            line-height: 1.3;
-        }
-
-        .game-container p {
-            color: var(--text-dim);
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-
-        .bag-options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            max-width: 300px;
-            margin: 0 auto;
-            width: 100%;
         }
 
         /* --- STATS SCREEN RESPONSIVE --- */
@@ -845,33 +760,6 @@
             margin-bottom: 15px;
             font-size: 0.9rem;
             line-height: 1.4;
-        }
-
-        /* Bag grid mobile */
-        .bag-grid { 
-            display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 12px; 
-            margin: 15px 0;
-        }
-        
-        .bag-item { 
-            height: 70px; 
-            background: linear-gradient(135deg, #be185d, #9d174d); 
-            border: 1px solid #f9a8d4;
-            border-radius: 15px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 2rem; 
-            cursor: pointer; 
-            animation: bounce 0.8s infinite alternate ease-in-out;
-            touch-action: manipulation;
-        }
-        
-        .bag-item:active {
-            transform: scale(0.95);
-            animation: none;
         }
 
         /* Menu modal mobile - CẬP NHẬT CHO HIỆU ỨNG TỒN KHO */
@@ -1185,103 +1073,9 @@
             100% { transform: translate(80px, 100vh) rotate(360deg); opacity: 0; }
         }
 
-        .steam-effect {
-            position: relative;
-        }
-        .steam-effect::after {
-            content: "";
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            width: 25px;
-            height: 35px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            filter: blur(6px);
-            animation: steam 3s infinite ease-in-out;
-            transform: translateX(-50%);
-        }
-
-        @keyframes steam {
-            0% { transform: translateX(-50%) translateY(0) scale(0.8); opacity: 0.5; }
-            50% { transform: translateX(-50%) translateY(-12px) scale(1); opacity: 0.8; }
-            100% { transform: translateX(-50%) translateY(-25px) scale(1.2); opacity: 0; }
-        }
-
-        .hot-item {
-            position: relative;
-            animation: hotGlow 2s infinite alternate;
-        }
-
-        @keyframes hotGlow {
-            from { filter: drop-shadow(0 0 4px rgba(255, 100, 0, 0.5)); }
-            to { filter: drop-shadow(0 0 12px rgba(255, 50, 0, 0.8)); }
-        }
-
         @keyframes fadeIn { 
             from { opacity: 0; transform: translateY(8px); } 
             to { opacity: 1; transform: translateY(0); } 
-        }
-        
-        @keyframes bounce { 
-            from { transform: translateY(0); } 
-            to { transform: translateY(-6px); } 
-        }
-
-        /* --- UNBOXING OVERLAY RESPONSIVE --- */
-        #unboxing-overlay {
-            position: fixed; 
-            inset: 0; 
-            background: rgba(0,0,0,0.95); 
-            z-index: 20000;
-            display: none; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center;
-            padding: 20px;
-        }
-        
-        .opening-bag { 
-            font-size: 5rem; 
-            filter: drop-shadow(0 0 15px var(--accent)); 
-            transition: 0.3s; 
-        }
-        
-        .zoom-shake { 
-            animation: zoom-in 5s forwards, shake 0.1s infinite; 
-        }
-
-        @keyframes zoom-in { 
-            0% { transform: scale(0.5); } 
-            100% { transform: scale(2); } 
-        }
-        
-        @keyframes shake {
-            0% { transform: translate(1px, 1px) rotate(0deg) scale(2); }
-            20% { transform: translate(-2px, 0px) rotate(1deg) scale(2); }
-            40% { transform: translate(1px, -1px) rotate(1deg) scale(2); }
-            60% { transform: translate(-2px, 1px) rotate(0deg) scale(2); }
-            80% { transform: translate(-1px, -1px) rotate(1deg) scale(2); }
-            100% { transform: translate(1px, -1px) rotate(-1deg) scale(2); }
-        }
-        
-        .shatter { 
-            animation: shatter-effect 0.4s ease-out forwards; 
-        }
-        
-        @keyframes shatter-effect {
-            0% { transform: scale(2); opacity: 1; }
-            100% { transform: scale(4); opacity: 0; filter: blur(12px); }
-        }
-
-        #unboxing-status {
-            margin-top: 80px;
-            letter-spacing: 3px;
-            color: white;
-            text-shadow: 0 0 8px red;
-            font-size: 1.2rem;
-            text-align: center;
-            padding: 0 10px;
         }
 
         /* --- MEDIA QUERIES CHO MÀN HÌNH LỚN HƠN --- */
@@ -1314,7 +1108,7 @@
             }
             
             .menu-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr;
                 gap: 20px;
                 max-width: 600px;
                 margin: 20px auto;
@@ -1331,13 +1125,6 @@
             
             .menu-title {
                 font-size: 1.2rem;
-            }
-            
-            .special-banner {
-                flex-direction: row;
-                justify-content: space-between;
-                padding: 12px 20px;
-                max-width: 600px;
             }
             
             .hero-title {
@@ -1398,10 +1185,6 @@
                 max-width: 700px;
             }
             
-            .special-banner {
-                max-width: 700px;
-            }
-            
             .wheel-wrap {
                 width: 320px;
                 height: 320px;
@@ -1438,7 +1221,7 @@
                 min-height: calc(60px + env(safe-area-inset-top, 0));
             }
             
-            .btn, .menu-card, .bag-item {
+            .btn, .menu-card {
                 cursor: pointer;
             }
         }
@@ -1468,69 +1251,52 @@
         * {
             -webkit-tap-highlight-color: transparent;
         }
-        /* --- TAB STYLES --- */
-        .tab-switch {
+        /* --- FIX LỆCH VÒNG QUAY --- */
+        .game-container {
+            text-align: center;
+            padding: 0 10px;
             display: flex;
-            margin: 20px 0;
-            border-bottom: 2px solid var(--border);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
         }
 
-        .tab-btn {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 10px 10px 0 0;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .game-container h2 {
+            color: var(--primary);
+            font-family: var(--font-tet);
+            font-size: 1.5rem;
+            margin: 10px 0 5px 0;
+            line-height: 1.3;
+            text-align: center;
+            width: 100%;
+        }
+
+        .game-container p {
+            color: var(--text-dim);
+            margin-bottom: 20px;
             font-size: 0.9rem;
+            line-height: 1.4;
+            text-align: center;
+            width: 100%;
         }
 
-        .tab-btn.active {
-            opacity: 1;
-            transform: translateY(-2px);
-            box-shadow: 0 -4px 10px rgba(0,0,0,0.2);
+        .wheel-wrap {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin: 15px auto;
+            max-width: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .tab-btn:not(.active) {
-            opacity: 0.7;
-            background: rgba(255,255,255,0.1) !important;
-        }
-
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-        /* Sửa phần tab styles hiện tại */
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Sửa nút tab */
-        .tab-btn.active {
-            opacity: 1;
-            transform: translateY(-2px);
-            box-shadow: 0 -4px 10px rgba(0,0,0,0.2);
-            background: var(--food-red) !important; /* Cho tab túi mù */
-        }
-
-        /* Màu cho tab wheel khi active */
-        #tab-wheel.active {
-            background: var(--accent) !important;
-        }
-
-        .tab-btn:not(.active) {
-            opacity: 0.7;
-            background: rgba(255,255,255,0.1) !important;
+        /* Căn chỉnh nút quay */
+        #spin-btn {
+            width: 200px !important;
+            margin: 20px auto !important;
+            display: block !important;
         }
     </style>
 </head>
@@ -1563,11 +1329,6 @@
         <div class="countdown" id="countdown">5</div>
     </div>
 
-    <div id="unboxing-overlay">
-        <div id="opening-bag-icon" class="opening-bag">🧧</div>
-        <h2 id="unboxing-status">ĐANG KHUI TÚI LỘC...</h2>
-    </div>
-
     <div class="header">
         <div class="logo" onclick="handleLogoClick()">🍜 Lớp 8/1</div>
         <div style="display: flex; align-items: center; gap: 8px;">
@@ -1586,27 +1347,11 @@
                 <div id="guest-notice" class="exp-tag">🎯 Ăn ngon - Chơi vui - Trúng thưởng lớn!</div>
             </div>
             
-            <div class="special-banner">
-                <div>
-                    <div>🔥</div>
-                    <div>
-                        <div>MÓN ĐẶC BIỆT HÔM NAY</div>
-                        <div>Chọn túi mù để khám phá!</div>
-                    </div>
-                </div>
-                <button onclick="nav('bag')">XEM NGAY</button>
-            </div>
-            
             <center>
                 <button class="btn btn-menu" onclick="showMenuModal()">📜 Menu TẾT</button>
             </center>
             
             <div class="menu-grid">
-                <div class="menu-card" onclick="nav('bag')">
-                    <div class="menu-icon">🧧</div>
-                    <div class="menu-title">Túi Mù Ẩm Thực<br>20.000đ / túi</div>
-                    <small>Bí mật ngon lành!</small>
-                </div>
                 <div class="menu-card" onclick="nav('wheel')">
                     <div class="menu-icon">🎡</div>
                     <div class="menu-title">Vòng Quay<br>Thần Tài</div>
@@ -1636,18 +1381,6 @@
             </div>
         </div>
 
-        <div id="screen-bag" class="screen">
-            <div class="back-button" onclick="nav('home')">← Về trang chủ</div>
-            <div class="game-container">
-                <h2>CHỌN LOẠI TÚI LỘC (20K)</h2>
-                <p>Mỗi túi chứa một món ẩm thực bất ngờ!</p>
-                <div class="bag-options">
-                    <button class="btn steam-effect" onclick="openSelector('Nước')">🧋 Nước Giải Khát</button>
-                    <button class="btn hot-item" onclick="openSelector('Đồ Ăn')">🌭 Đồ Ăn Vặt Nóng</button>
-                </div>
-            </div>
-        </div>
-
         <div id="screen-wheel" class="screen">
             <div class="back-button" onclick="nav('home')">← Về trang chủ</div>
             <div class="game-container">
@@ -1665,129 +1398,35 @@
             <div class="back-button" onclick="nav('home')">← Về trang chủ</div>
             <h2>📊 BÁO CÁO ẨM THỰC</h2>
             
-            <!-- TAB CHUYỂN ĐỔI -->
-            <div class="tab-switch">
-                <button id="tab-bag" class="tab-btn active" onclick="switchTab('bag')" 
-                        style="background: var(--food-red); color: white;">
-                    🎁 TÚI MÙ
-                </button>
-                <button id="tab-wheel" class="tab-btn" onclick="switchTab('wheel')"
-                        style="background: var(--accent); color: white;">
-                    🎡 VÒNG QUAY
-                </button>
-                <button id="tab-summary" class="tab-btn" onclick="switchTab('summary')"
-                        style="background: var(--primary); color: #450a0a;">
-                    📊 TỔNG HỢP
-                </button>
-            </div>
-            
-            <!-- NỘI DUNG TAB TÚI MÙ -->
-            <div id="tab-content-bag" class="tab-content active">
-                <div class="stat-bar">
-                    <div class="stat-box" style="border-bottom-color: var(--food-red);">
-                        <small>Doanh thu</small>
-                        <div id="bag-rev" class="stat-val" style="color:var(--food-red);">0đ</div>
-                    </div>
-                    <div class="stat-box" style="border-bottom-color: var(--food-brown);">
-                        <small>Vốn</small>
-                        <div id="bag-cost" class="stat-val" style="color:var(--food-brown);">0đ</div>
-                    </div>
-                    <div class="stat-box" style="border-bottom-color: var(--primary);">
-                        <small>Lãi</small>
-                        <div id="bag-profit" class="stat-val" style="color:var(--primary);">0đ</div>
-                    </div>
+            <div class="stat-bar">
+                <div class="stat-box" style="border-bottom-color: var(--accent);">
+                    <small>Doanh thu</small>
+                    <div id="wheel-rev" class="stat-val" style="color:var(--accent);">0đ</div>
                 </div>
-                
-                <div style="overflow-x: auto; margin-top: 20px;">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Thời gian</th>
-                                <th>Món</th>
-                                <th>Giá bán</th>
-                                <th>Giá vốn</th>
-                                <th>Lãi/lỗ</th>
-                                <th>Hoàn trả</th>
-                            </tr>
-                        </thead>
-                        <tbody id="stat-table-bag"></tbody>
-                    </table>
+                <div class="stat-box" style="border-bottom-color: var(--text-dim);">
+                    <small>Vốn</small>
+                    <div id="wheel-cost" class="stat-val" style="color:var(--text-dim);">0đ</div>
+                </div>
+                <div class="stat-box" style="border-bottom-color: #9ca3af;">
+                    <small>Lãi/lỗ</small>
+                    <div id="wheel-profit" class="stat-val" style="color:#9ca3af;">0đ</div>
                 </div>
             </div>
             
-            <!-- NỘI DUNG TAB VÒNG QUAY -->
-            <div id="tab-content-wheel" class="tab-content">
-                <div class="stat-bar">
-                    <div class="stat-box" style="border-bottom-color: var(--accent);">
-                        <small>Doanh thu</small>
-                        <div id="wheel-rev" class="stat-val" style="color:var(--accent);">0đ</div>
-                    </div>
-                    <div class="stat-box" style="border-bottom-color: var(--text-dim);">
-                        <small>Vốn</small>
-                        <div id="wheel-cost" class="stat-val" style="color:var(--text-dim);">0đ</div>
-                    </div>
-                    <div class="stat-box" style="border-bottom-color: #9ca3af;">
-                        <small>Lãi/lỗ</small>
-                        <div id="wheel-profit" class="stat-val" style="color:#9ca3af;">0đ</div>
-                    </div>
-                </div>
-                
-                <div style="overflow-x: auto; margin-top: 20px;">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Thời gian</th>
-                                <th>Quà</th>
-                                <th>Giá bán</th>
-                                <th>Giá vốn</th>
-                                <th>Lãi/lỗ</th>
-                                <th>Hoàn trả</th>
-                            </tr>
-                        </thead>
-                        <tbody id="stat-table-wheel"></tbody>
-                    </table>
-                </div>
-            </div>
-            
-            <!-- TAB TỔNG HỢP -->
-            <div id="tab-content-summary" class="tab-content">
-                <div class="stat-bar">
-                    <div class="stat-box" style="border-bottom-color: var(--success);">
-                        <small>Tổng doanh thu</small>
-                        <div id="summary-total-rev" class="stat-val" style="color:var(--success);">0đ</div>
-                    </div>
-                    <div class="stat-box" style="border-bottom-color: var(--danger);">
-                        <small>Tổng vốn</small>
-                        <div id="summary-total-cost" class="stat-val" style="color:var(--danger);">0đ</div>
-                    </div>
-                    <div class="stat-box" style="border-bottom-color: var(--primary);">
-                        <small>Tổng lãi</small>
-                        <div id="summary-total-profit" class="stat-val" style="color:var(--primary);">0đ</div>
-                    </div>
-                </div>
-                
-                <div style="margin-top: 20px; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px;">
-                    <h3 style="color: var(--primary); margin-top: 0; text-align: center;">📈 THỐNG KÊ CHI TIẾT</h3>
-                    
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
-                        <div style="background: rgba(220, 38, 38, 0.1); padding: 15px; border-radius: 8px; border-left: 4px solid var(--food-red);">
-                            <div style="font-size: 0.8rem; color: var(--text-dim);">TÚI MÙ ĐÃ BÁN</div>
-                            <div id="summary-bag-count" style="font-size: 1.5rem; font-weight: bold; color: var(--food-red);">0</div>
-                            <div style="font-size: 0.75rem; color: var(--text-dim);" id="summary-bag-amount">0đ</div>
-                        </div>
-                        
-                        <div style="background: rgba(244, 114, 182, 0.1); padding: 15px; border-radius: 8px; border-left: 4px solid var(--accent);">
-                            <div style="font-size: 0.8rem; color: var(--text-dim);">VÒNG QUAY ĐÃ QUAY</div>
-                            <div id="summary-wheel-count" style="font-size: 1.5rem; font-weight: bold; color: var(--accent);">0</div>
-                            <div style="font-size: 0.75rem; color: var(--text-dim);" id="summary-wheel-amount">0đ</div>
-                        </div>
-                    </div>
-                    
-                    <div style="margin-top: 20px; text-align: center;">
-                        <div style="font-size: 0.9rem; color: var(--text-dim);">TỔNG SỐ GIAO DỊCH</div>
-                        <div id="summary-total-count" style="font-size: 2rem; font-weight: bold; color: var(--primary);">0</div>
-                    </div>
-                </div>
+            <div style="overflow-x: auto; margin-top: 20px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Thời gian</th>
+                            <th>Quà</th>
+                            <th>Giá bán</th>
+                            <th>Giá vốn</th>
+                            <th>Lãi/lỗ</th>
+                            <th>Hoàn trả</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stat-table-wheel"></tbody>
+                </table>
             </div>
             
             <button class="btn btn-danger" onclick="clearStats()" style="margin-top: 20px;">XÓA SỔ SÁCH</button>
@@ -1813,25 +1452,11 @@
         </div>
     </div>
 
-    <div id="bag-selector" class="overlay">
-        <div class="modal">
-            <h3>CHỌN TÚI LỘC BẤT KỲ</h3>
-            <p>Chọn 1 trong 9 túi để khám phá món ăn!</p>
-            <div class="bag-grid" id="bag-grid"></div>
-        </div>
-    </div>
-
     <div id="res-modal" class="overlay" style="z-index: 10001;">
         <div class="modal">
             <div id="res-icon">🎁</div>
             <h3 id="res-name">---</h3>
             <div id="res-wish"></div>
-            <!--
-            <div id="admin-actions" style="display:none; margin-top: 15px;">
-                <button class="btn" style="background:var(--success); margin-bottom:10px; color:white;" onclick="saveEntry(true)">💰 LƯU DOANH THU</button>
-                <button class="btn" style="background:var(--accent); margin-bottom:10px; color:white;" onclick="refundCurrentItem()">↩️ HOÀN TIỀN & HOÀN MÓN</button>
-            </div>
-            -->
             <button class="btn btn-primary" style="background:#334155; color:white; margin-top: 15px;" onclick="saveEntry(false)">ĐÓNG</button>
         </div>
     </div>
@@ -1869,47 +1494,33 @@
             console.log('✅ Đã cập nhật menu phiên bản mới:', MENU_VERSION);
         }
 
-                // DỮ LIỆU SẢN PHẨM
-                // ==================== DỮ LIỆU SẢN PHẨM CÓ SỐ LƯỢNG ====================
-            const MENU_ITEMS = {
-                'Nước Giải Khát': [
-                    {id: 'nước_sâm_001', name: "Nước sâm", cost: 10000, stock: 100, icon: "🥤", desc:"Nước sâm mát lạnh"},
-                    {id: 'trà_tắc_002', name: "Trà tắc", cost: 10000, stock: 100, icon: "🍋", desc:"Trà tắc thơm ngon"},
-                ],
-                'Đồ Ăn Vặt': [
-                    {id: 'bánh_lọc_001', name: "Bánh lọc", cost: 5000, stock: 200, icon: "🌯", desc: "Bánh lọc"},
-                    {id: 'bắp_xào_002', name: "Bắp xào", cost: 20000, stock: 75, icon: "🌽", desc: "Bắp xào thơm ngon"},
-                    {id: 'khoai_tây_003', name: "Khoai Tây lắc phô mai", cost: 20000, stock: 70, icon: "🍟", desc: "Giòn tan"},
-                    {id: 'xôi_truyền_thống_004', name: "Xôi truyền thống", cost: 15000, stock: 50, icon: "🌭", desc: "Xúc xích nướng thơm lừng"},
-                    {id: 'bắp_rang_bơ_005', name: "Bắp rang bơ", cost: 10000, stock: 50, icon: "🍿", desc: "Bắp rang bơ thơm ngon"},
-                    {id: 'khoai_tây_chấm_006', name: "Khoai tây chấm tương", cost: 15000, stock: 100, icon: "🍟", desc: "Giòn tan sốt đặc biệt"},
-                    {id: 'khô_gà_007', name: "Khô gà", cost: 15000, stock: 50, icon: "🥓", desc: "Khô gà dai dai"},
-                    {id: 'xôi_mặn_008', name: "Xôi mặn", cost: 15000, stock: 15, icon: "🍚", desc: "Xôi mặn đậm đà"}
-                ]
-            };
+        // DỮ LIỆU SẢN PHẨM
+        const MENU_ITEMS = {
+            'Nước Giải Khát': [
+                {id: 'nước_sâm_001', name: "Nước sâm", cost: 10000, stock: 100, icon: "🥤", desc:"Nước sâm mát lạnh"},
+                {id: 'trà_tắc_002', name: "Trà tắc", cost: 10000, stock: 100, icon: "🍋", desc:"Trà tắc thơm ngon"},
+            ],
+            'Đồ Ăn Vặt': [
+                {id: 'bánh_lọc_001', name: "Bánh lọc", cost: 5000, stock: 200, icon: "🌯", desc: "Bánh lọc"},
+                {id: 'bắp_xào_002', name: "Bắp xào", cost: 20000, stock: 75, icon: "🌽", desc: "Bắp xào thơm ngon"},
+                {id: 'khoai_tây_003', name: "Khoai Tây lắc phô mai", cost: 20000, stock: 70, icon: "🍟", desc: "Giòn tan"},
+                {id: 'xôi_truyền_thống_004', name: "Xôi truyền thống", cost: 15000, stock: 50, icon: "🌭", desc: "Xúc xích nướng thơm lừng"},
+                {id: 'bắp_rang_bơ_005', name: "Bắp rang bơ", cost: 10000, stock: 50, icon: "🍿", desc: "Bắp rang bơ thơm ngon"},
+                {id: 'khoai_tây_chấm_006', name: "Khoai tây chấm tương", cost: 15000, stock: 100, icon: "🍟", desc: "Giòn tan sốt đặc biệt"},
+                {id: 'khô_gà_007', name: "Khô gà", cost: 15000, stock: 50, icon: "🥓", desc: "Khô gà dai dai"},
+                {id: 'xôi_mặn_008', name: "Xôi mặn", cost: 15000, stock: 15, icon: "🍚", desc: "Xôi mặn đậm đà"}
+            ]
+        };
 
-            // VÀ SỬA LUÔN ITEMS:
-            const ITEMS = {
-                'Nước': [ 
-                    {name: "Nước sâm", cost: 10000, gW: 50, aW: 50, icon: "🥤", desc:"Nước sâm mát lạnh", menuId: 'nước_sâm_001'},
-                    {name: "Trà tắc", cost: 15000, gW: 40, aW: 40, icon: "🍋", desc:"Trà tắc thơm ngon", menuId: 'trà_tắc_002'},
-                ],
-                'Đồ Ăn': [ 
-                    {name: "Bánh lọc", cost: 5000, gW: 33, aW: 33, icon: "🌯", desc:"Bánh lọc Huế", menuId: 'bánh_lọc_001'},
-                    {name: "Bắp xào", cost: 15000, gW: 33, aW: 33, icon: "🌽", desc:"Bắp xào thơm ngon", menuId: 'bắp_xào_002'},
-                    {name: "Khoai Tây chấm tương", cost: 15000, gW: 34, aW: 34, icon: "🍟", desc:"Giòn tan sốt đặc biệt", menuId: 'khoai_tây_003'}
-                ],
-                'Wheel': [
-                    {name: "Kẹo", cost: 1000, gW: 10, aW: 40, icon: "🍬", desc: "Ngọt ngào ngày Tết"},
-                    {name: "Voucher 5k", cost: 5000, gW: 35, aW: 20, icon: "🎟️", desc: "Giảm 5k món bất kỳ"},
-                    {name: "Voucher 10k", cost: 10000, gW: 50, aW: 10, icon: "🎟️", desc: "Giảm 10k món đặc biệt"},
-                    {name: "Chúc bạn may mắn lần sau", cost: 0, gW: 5, aW: 30, icon: "🍀", desc: "Chúc bạn may mắn lần sau"}
-                    {name: "Kẹo", cost: 1000, gW: 20, aW: 40, icon: "🍬", desc: "Ngọt ngào ngày Tết"},
-                    {name: "Voucher 5k", cost: 5000, gW: 30, aW: 20, icon: "🎟️", desc: "Giảm 5k món bất kỳ"},
-                    {name: "Voucher 10k", cost: 10000, gW: 40, aW: 10, icon: "🎟️", desc: "Giảm 10k món đặc biệt"},
-                    {name: "Chúc bạn may mắn lần sau", cost: 0, gW: 5, aW: 30, icon: "🍀", desc: "Chúc bạn may mắn lần sau"}
-                ]
-            };
+        // VÒNG QUAY ITEMS
+        const ITEMS = {
+            'Wheel': [
+                {name: "Kẹo", cost: 1000, gW: 10, aW: 40, icon: "🍬", desc: "Ngọt ngào ngày Tết"},
+                {name: "Voucher 5k", cost: 5000, gW: 35, aW: 20, icon: "🎟️", desc: "Giảm 5k món bất kỳ"},
+                {name: "Voucher 10k", cost: 10000, gW: 50, aW: 10, icon: "🎟️", desc: "Giảm 10k món đặc biệt"},
+                {name: "Chúc bạn may mắn lần sau", cost: 0, gW: 5, aW: 30, icon: "🍀", desc: "Chúc bạn may mắn lần sau"}
+            ]
+        };
 
         // LỜI CHÚC TẾT
         const TET_WISHES = [
@@ -1929,7 +1540,6 @@
         let isAdmin = false, pinUnlocked = false, isSpinning = false;
         let stats = JSON.parse(localStorage.getItem('tet_8_1_food')) || [];
         let pending = null;
-        let currentTab = 'bag';
         let currentEditingItem = null;
 
         // HÀM XỬ LÝ MENU MODAL
@@ -1955,7 +1565,7 @@
             const menuContent = document.getElementById('menu-content');
             if (!menuContent) return;
             
-             console.log("🔍 [DEBUG] MENU_ITEMS:", MENU_ITEMS);
+            console.log("🔍 [DEBUG] MENU_ITEMS:", MENU_ITEMS);
             console.log("🔍 [DEBUG] Món nước:", MENU_ITEMS['Nước Giải Khát']);
             
             menuContent.innerHTML = '';
@@ -2012,56 +1622,16 @@
             saveMenuToStorage();
         }
 
-        // ==================== CHUYỂN TAB THỐNG KÊ ====================
-        function switchTab(tabName) {
-            currentTab = tabName;
-            
-            // Cập nhật nút tab
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-                btn.style.opacity = '0.7';
-            });
-            
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            
-            // Kích hoạt tab được chọn
-            const activeBtn = document.getElementById('tab-' + tabName);
-            const activeContent = document.getElementById('tab-content-' + tabName);
-            
-            if (activeBtn && activeContent) {
-                activeBtn.classList.add('active');
-                activeBtn.style.opacity = '1';
-                activeContent.classList.add('active');
-            }
-            
-            // Render lại thống kê cho tab đó
-            renderStats();
-        }
-
         // ==================== HÀM RENDERSTATS DUY NHẤT ====================
         function renderStats() {
             // KHỞI TẠO BIẾN TÍNH TOÁN
-            let bagRevenue = 0;
-            let bagCost = 0;
             let wheelRevenue = 0;
             let wheelCost = 0;
             
             // LỌC DỮ LIỆU THEO LOẠI
-            const bagItems = stats.filter(item => 
-                item.type === 'Túi Mù Ẩm Thực'
-            );
-            
             const wheelItems = stats.filter(item => 
                 item.type === 'Vòng Quay'
             );
-            
-            // TÍNH TOÁN TÚI MÙ
-            bagItems.forEach((item, index) => {
-                bagRevenue += 20000; // Giá bán cố định
-                bagCost += item.cost || 0;
-            });
             
             // TÍNH TOÁN VÒNG QUAY
             wheelItems.forEach((item, index) => {
@@ -2069,22 +1639,10 @@
                 wheelCost += item.cost || 0;
             });
             
-            // TÍNH TOÁN TỔNG
-            const bagProfit = bagRevenue - bagCost;
+            // TÍNH TOÁN LỢI NHUẬN
             const wheelProfit = wheelRevenue - wheelCost;
-            const totalRevenue = bagRevenue + wheelRevenue;
-            const totalCost = bagCost + wheelCost;
-            const totalProfit = totalRevenue - totalCost;
             
-            // HIỂN THỊ TÚI MÙ (TAB BAG)
-            if (document.getElementById('bag-rev')) {
-                document.getElementById('bag-rev').innerText = bagRevenue.toLocaleString() + 'đ';
-                document.getElementById('bag-cost').innerText = bagCost.toLocaleString() + 'đ';
-                document.getElementById('bag-profit').innerText = bagProfit.toLocaleString() + 'đ';
-                document.getElementById('bag-profit').style.color = bagProfit >= 0 ? 'var(--success)' : 'var(--danger)';
-            }
-            
-            // HIỂN THỊ VÒNG QUAY (TAB WHEEL)
+            // HIỂN THỊ VÒNG QUAY
             if (document.getElementById('wheel-rev')) {
                 document.getElementById('wheel-rev').innerText = wheelRevenue.toLocaleString() + 'đ';
                 document.getElementById('wheel-cost').innerText = wheelCost.toLocaleString() + 'đ';
@@ -2092,81 +1650,8 @@
                 document.getElementById('wheel-profit').style.color = wheelProfit >= 0 ? 'var(--success)' : 'var(--danger)';
             }
             
-            // HIỂN THỊ TỔNG HỢP (TAB SUMMARY)
-            if (document.getElementById('summary-total-rev')) {
-                document.getElementById('summary-total-rev').innerText = totalRevenue.toLocaleString() + 'đ';
-                document.getElementById('summary-total-cost').innerText = totalCost.toLocaleString() + 'đ';
-                document.getElementById('summary-total-profit').innerText = totalProfit.toLocaleString() + 'đ';
-                document.getElementById('summary-total-profit').style.color = totalProfit >= 0 ? 'var(--success)' : 'var(--danger)';
-                
-                // Cập nhật số lượng cho tab summary
-                document.getElementById('summary-bag-count').innerText = bagItems.length;
-                document.getElementById('summary-bag-amount').innerText = bagRevenue.toLocaleString() + 'đ';
-                document.getElementById('summary-wheel-count').innerText = wheelItems.length;
-                document.getElementById('summary-wheel-amount').innerText = wheelCost.toLocaleString() + 'đ (vốn)';
-                document.getElementById('summary-total-count').innerText = stats.length;
-            }
-            
-            // HIỂN THỊ BẢNG THEO TAB ĐANG CHỌN
-            if (currentTab === 'bag') {
-                renderBagTable(bagItems);
-            } else if (currentTab === 'wheel') {
-                renderWheelTable(wheelItems);
-            }
-        }
-
-        // ==================== HIỂN THỊ BẢNG TÚI MÙ ====================
-        function renderBagTable(items) {
-            const tbody = document.getElementById('stat-table-bag');
-            if (!tbody) return;
-            
-            tbody.innerHTML = '';
-            
-            if (items.length === 0) {
-                tbody.innerHTML = `
-                    <tr>
-                        <td colspan="6" style="text-align: center; padding: 20px; color: var(--text-dim);">
-                            📭 Chưa có giao dịch túi mù nào
-                        </td>
-                    </tr>
-                `;
-                return;
-            }
-            
-            items.forEach((item, index) => {
-                const salePrice = 20000;
-                const cost = item.cost || 0;
-                const profit = salePrice - cost;
-                
-                // Tìm index thực trong stats
-                const realIndex = stats.findIndex(stat => 
-                    stat.date === item.date && 
-                    stat.name === item.name && 
-                    stat.type === item.type
-                );
-                
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td><small>${item.date || ''}</small></td>
-                    <td>
-                        <b>${item.name || ''} ${item.icon || ''}</b><br>
-                        <small style="color:var(--food-red)">Túi Mù</small>
-                    </td>
-                    <td>${salePrice.toLocaleString()}đ</td>
-                    <td>${cost.toLocaleString()}đ</td>
-                    <td style="color:${profit >= 0 ? 'var(--success)' : 'var(--danger)'}">
-                        ${profit >= 0 ? '+' : ''}${profit.toLocaleString()}đ
-                    </td>
-                    <td>
-                        <button onclick="deleteStat(${realIndex})" 
-                                style="border:none; background:none; cursor:pointer; color:red; font-size:16px; padding:5px;" 
-                                title="Xóa & Hoàn trả">
-                            ↩️
-                        </button>
-                    </td>
-                `;
-                tbody.appendChild(row);
-            });
+            // HIỂN THỊ BẢNG VÒNG QUAY
+            renderWheelTable(wheelItems);
         }
 
         // ==================== HIỂN THỊ BẢNG VÒNG QUAY ====================
@@ -2311,30 +1796,6 @@
             return false;
         }
 
-        // ==================== HÀM HOÀN TRẢ KHI XÓA GIAO DỊCH ====================
-        // HÀM HOÀN TRẢ KHI XÓA GIAO DỊCH
-        function refundStock(item) {
-            // Kiểm tra xem item có menuId không và chỉ admin mới hoàn trả
-            if (!item || !item.menuId || !isAdmin) return false;
-    
-    // ... phần còn lại giữ nguyên
-            
-            // Tìm item trong MENU_ITEMS
-            for (const category in MENU_ITEMS) {
-                const foundItem = MENU_ITEMS[category].find(menuItem => menuItem.id === item.menuId);
-                if (foundItem) {
-                    // Tăng số lượng lên 1 (hoàn trả)
-                    foundItem.stock += 1;
-                    console.log(`✅ Đã hoàn trả 1 ${foundItem.name} vào kho. Tồn kho mới: ${foundItem.stock}`);
-                    
-                    // Lưu thay đổi
-                    saveMenuToStorage();
-                    return true;
-                }
-            }
-            return false;
-        }
-
         // Lưu menu vào localStorage
         function saveMenuToStorage() {
             localStorage.setItem('tet_8_1_menu', JSON.stringify(MENU_ITEMS));
@@ -2374,14 +1835,8 @@
             document.getElementById('menu-modal').style.display = 'flex';
         }
 
-        // ==================== CẬP NHẬT HÀM LƯU DOANH THU ====================
-        
-// HÀM ĐÓNG MODAL - ĐÃ ĐƠN GIẢN HÓA
+        // HÀM ĐÓNG MODAL
         function saveEntry() {
-            // Chỉ đóng modal, không làm gì khác vì đã tự động lưu trong showResult()
-            document.getElementById('res-modal').style.display = 'none';
-            pending = null; // Reset pending
-            // Đóng modal
             document.getElementById('res-modal').style.display = 'none';
             pending = null; // Reset pending
         }
@@ -2495,16 +1950,6 @@
             // CẬP NHẬT HEADER
             updateHeader();
             
-            // TỰ ĐỘNG ĐỔI MÀU BANNER
-            setInterval(() => {
-                const banner = document.querySelector('.special-banner');
-                if(banner) {
-                    const colors = ['var(--food-red)', 'var(--food-brown)', '#b91c1c', '#991b1b'];
-                    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                    banner.style.background = `linear-gradient(90deg, ${randomColor}, var(--food-gold))`;
-                }
-            }, 10000);
-            
             // PHÁO HOA NGẪU NHIÊN
             setInterval(() => {
                 if(Math.random() > 0.7) {
@@ -2570,81 +2015,6 @@
             document.getElementById('btn-stats').style.display = isAdmin ? 'block' : 'none';
             document.getElementById('guest-notice').style.display = isAdmin ? 'none' : 'inline-block';
             document.getElementById('welcome-text').innerText = isAdmin ? 'Xin chào, Chủ Quán!' : 'Lễ Hội Ẩm Thực Tết 8/1';
-        }
-
-        // MỞ SELECTOR TÚI
-        function openSelector(type) {
-            const grid = document.getElementById('bag-grid'); 
-            grid.innerHTML = '';
-            
-            // Lọc ra các món có trọng số > 0
-            const pool = ITEMS[type].filter(item => (isAdmin ? item.aW : item.gW) > 0);
-            
-            if (pool.length === 0) {
-                alert('Không có món nào trong loại này!');
-                return;
-            }
-            
-            for(let i = 0; i < 9; i++) {
-                const bagItem = document.createElement('div');
-                bagItem.className = 'bag-item';
-                bagItem.innerHTML = '🧧';
-                bagItem.onclick = () => {
-                    const key = isAdmin ? 'aW' : 'gW';
-                    let total = pool.reduce((a, b) => a + b[key], 0);
-                    let random = Math.random() * total;
-                    let selectedItem = pool[0];
-                    
-                    for(let item of pool) {
-                        if(random < item[key]) {
-                            selectedItem = item;
-                            break;
-                        }
-                        random -= item[key];
-                    }
-                    
-                    pending = {
-                        ...selectedItem, 
-                        type: 'Túi Mù Ẩm Thực', 
-                        date: new Date().toLocaleTimeString('vi-VN', { 
-                            hour: '2-digit', 
-                            minute: '2-digit' 
-                        })
-                    };
-                    
-                    document.getElementById('bag-selector').style.display = 'none';
-                    triggerUnboxing();
-                };
-                grid.appendChild(bagItem);
-            }
-            
-            document.getElementById('bag-selector').style.display = 'flex';
-        }
-
-        // KÍCH HOẠT UNBOXING
-        function triggerUnboxing() {
-            const overlay = document.getElementById('unboxing-overlay');
-            const bagIcon = document.getElementById('opening-bag-icon');
-            const statusText = document.getElementById('unboxing-status');
-            
-            overlay.style.display = 'flex';
-            bagIcon.className = 'opening-bag zoom-shake';
-            statusText.innerText = 'ĐANG KHUI TÚI LỘC...';
-            
-            let shakeCount = 0;
-            const shakeInterval = setInterval(() => {
-                shakeCount++;
-                if (shakeCount > 30) { // 30 lần * 120ms = 3.6 giây
-                    clearInterval(shakeInterval);
-                    bagIcon.className = 'opening-bag shatter';
-                    statusText.innerText = 'CHÚC MỪNG BẠN! 🎉';
-                    
-                    setTimeout(() => {
-                        overlay.style.display = 'none';
-                        showResult();
-                    }, 500);
-                }
-            }, 120);
         }
 
         // VẼ VÒNG QUAY
@@ -2754,34 +2124,7 @@
             }, 4100);
         }
 
-        // HÀM HOÀN TIỀN CHO MÓN HIỆN TẠI
-        function refundCurrentItem() {
-            if (!pending) return;
-            
-            if(confirm(`Hoàn tiền và hoàn trả ${pending.name} vào kho?\n\nGiao dịch này sẽ bị hủy.`)) {
-                // HOÀN TRẢ SỐ LƯỢNG
-                if (pending.menuId) {
-                    refundStock(pending);
-                }
-                
-                // ĐÓNG MODAL
-                document.getElementById('res-modal').style.display = 'none';
-                
-                // THÔNG BÁO
-                alert(`✅ Đã hoàn tiền và hoàn trả ${pending.name} vào kho!`);
-                
-                // PHÁO HOA HOÀN TIỀN
-                confetti({
-                    particleCount: 100,
-                    spread: 70,
-                    origin: { y: 0.6 },
-                    colors: ['#f472b6', '#ffffff', '#34d399'],
-                    startVelocity: 40
-                });
-            }
-        }
-
-        // HIỂN THỊ KẾT QUẢ - SỬA LẠI ĐÚNG
+        // HIỂN THỊ KẾT QUẢ
         function showResult() {
             document.getElementById('res-name').innerText = pending.name;
             document.getElementById('res-icon').innerText = pending.icon;
@@ -2791,23 +2134,18 @@
             
             document.getElementById('res-modal').style.display = 'flex';
             
-            // CHỈ ADMIN MỚI LƯU STATS VÀ GIẢM TỒN KHO
+            // CHỈ ADMIN MỚI LƯU STATS
             if (pending && isAdmin) {
                 // Thêm vào thống kê
                 stats.unshift(pending);
                 localStorage.setItem('tet_8_1_food', JSON.stringify(stats));
                 
-                // GIẢM SỐ LƯỢNG TỒN KHO nếu có menuId
-                if (pending.menuId) {
-                    decreaseStock(pending.menuId, 1);
-                }
-                
                 // Cập nhật thống kê ngay lập tức
                 renderStats();
-                console.log(`✅ ADMIN: Đã lưu ${pending.name} vào thống kê và giảm tồn kho`);
+                console.log(`✅ ADMIN: Đã lưu ${pending.name} vào thống kê`);
             } else if (pending && !isAdmin) {
                 // KHÁCH: KHÔNG làm gì cả, chỉ chơi thử
-                console.log(`👤 KHÁCH: ${pending.name} - Chỉ chơi thử, không lưu stats và không giảm tồn kho`);
+                console.log(`👤 KHÁCH: ${pending.name} - Chỉ chơi thử, không lưu stats`);
             }
             
             // PHÁO HOA THEO KẾT QUẢ
@@ -2830,68 +2168,34 @@
             }
         }
 
-
         // XÓA MỘT MỤC THỐNG KÊ
         function deleteStat(index) {
             if(index < 0 || index >= stats.length) return;
             
-            if(confirm('Xóa mục này khỏi sổ sách?\n\n⚠ Lưu ý: Số lượng món ăn sẽ được hoàn trả vào kho!')) {
-                const deletedItem = stats[index];
-                const itemType = deletedItem.type;
-                
+            if(confirm('Xóa mục này khỏi sổ sách?')) {
                 // Xóa khỏi stats
                 stats.splice(index, 1);
                 localStorage.setItem('tet_8_1_food', JSON.stringify(stats));
                 
-                // HOÀN TRẢ SỐ LƯỢNG
-                if (deletedItem && deletedItem.menuId) {
-                    refundStock(deletedItem);
-                    alert(`✅ Đã xóa giao dịch và hoàn trả 1 ${deletedItem.name} vào kho!`);
-                } else {
-                    alert('✅ Đã xóa giao dịch!');
-                }
-                
-                // TỰ ĐỘNG CHUYỂN ĐẾN TAB PHÙ HỢP
-                if (itemType === 'Túi Mù Ẩm Thực') {
-                    switchTab('bag');
-                } else if (itemType === 'Vòng Quay') {
-                    switchTab('wheel');
-                }
+                alert('✅ Đã xóa giao dịch!');
                 
                 // Cập nhật giao diện
                 renderStats();
-                renderMenu();
             }
         }
 
         // XÓA TOÀN BỘ THỐNG KÊ
         function clearStats() {
-            if(confirm('Bạn có chắc chắn muốn xóa toàn bộ sổ sách?\n\n⚠ CẢNH BÁO: Tất cả số lượng món đã bán sẽ được HOÀN TRẢ vào kho!\nHành động này không thể hoàn tác!')) {
-                // HOÀN TRẢ TẤT CẢ TRƯỚC KHI XÓA
-                let refundCount = 0;
-                
-                stats.forEach(item => {
-                    if (item && item.menuId) {
-                        if (refundStock(item)) {
-                            refundCount++;
-                        }
-                    }
-                });
-                
+            if(confirm('Bạn có chắc chắn muốn xóa toàn bộ sổ sách?\n\n⚠ CẢNH BÁO: Hành động này không thể hoàn tác!')) {
                 // Xóa toàn bộ
                 stats = [];
                 localStorage.setItem('tet_8_1_food', JSON.stringify(stats));
                 
                 // Thông báo
-                if (refundCount > 0) {
-                    alert(`✅ Đã xóa toàn bộ sổ sách và hoàn trả ${refundCount} món vào kho!`);
-                } else {
-                    alert('✅ Đã xóa toàn bộ sổ sách!');
-                }
+                alert('✅ Đã xóa toàn bộ sổ sách!');
                 
                 // Cập nhật giao diện
                 renderStats();
-                renderMenu();
             }
         }
 
@@ -3001,6 +2305,4 @@
         };
     </script>
 </body>
-
-
 </html>
